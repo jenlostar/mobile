@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:app xmlns:ti="http://ti.appcelerator.org">
+    <id>com.mobile.app</id>
+    <name>mobile</name>
+    <version>1.0</version>
+    <publisher>not specified</publisher>
+    <url/>
+    <description/>
+    <copyright>not specified</copyright>
+    <icon>appicon.png</icon>
+    <fullscreen>false</fullscreen>
+    <navbar-hidden>false</navbar-hidden>
+    <analytics>false</analytics>
+    <guid>eafad796-1467-4d03-bb03-7253654b5726</guid>
+    <property name="ti.ui.defaultunit" type="string">dp</property>
+    <ios />
+    <android xmlns:android="http://schemas.android.com/apk/res/android">
+        <manifest>
+            <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19"/>
+            <application android:icon="@drawable/appicon"
+                         android:label="mobile"
+                         android:name="MobileApplication"
+                         android:debuggable="false"
+                         android:theme="@style/Theme.AppCompat">
+                <activity android:name=".MobileActivity"
+                          android:label="@string/app_name"
+                          android:screenOrientation="nosensor"
+                          android:theme="@style/Theme.Titanium"
+                          android:configChanges="keyboardHidden|orientation|screenSize">
+                    <intent-filter>
+                        <action android:name="android.intent.action.MAIN"/>
+                        <category android:name="android.intent.category.LAUNCHER"/>
+                    </intent-filter>
+                </activity>
+                <activity android:name="org.appcelerator.titanium.TiActivity" android:screenOrientation="nosensor" android:configChanges="keyboardHidden|orientation|screenSize"/>
+                <activity android:name="org.appcelerator.titanium.TiTranslucentActivity" android:screenOrientation="nosensor" android:configChanges="keyboardHidden|orientation|screenSize" android:theme="@style/Theme.AppCompat.Translucent"/>
+                <activity android:name="ti.modules.titanium.ui.android.TiPreferencesActivity" android:screenOrientation="nosensor" android:configChanges="screenSize"/>
+            </application>
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+        </manifest>
+    </android>
+    <mobileweb />
+    <modules />
+    <deployment-targets>
+        <target device="android">true</target>
+        <target device="blackberry">false</target>
+        <target device="ipad">false</target>
+        <target device="iphone">false</target>
+        <target device="mobileweb">false</target>
+    </deployment-targets>
+    <sdk-version>3.3.0.GA</sdk-version>
+    <plugins>
+        <plugin version="1.0">ti.alloy</plugin>
+    </plugins>
+</ti:app>
