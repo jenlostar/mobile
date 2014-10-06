@@ -1,0 +1,6 @@
+'Label': {
+    font: {
+        fontSize: '18sp',
+        fontFamily: 'SourceSansPro-Regular'
+    }
+}

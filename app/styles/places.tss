@@ -1,0 +1,66 @@
+// http://androiddrawables.com/Menu.html
+'.container' : {
+
+},
+
+'#actionbar': {
+    //icon: '/actionicon.png',
+    //displayHomeAsUp: true,
+    //backgroundImage: '/actionbackground.png'
+    title: 'Mi Peluquería',
+    subtitle: 'Lugares disponibles'
+},
+
+'#preferences': {
+    icon: Ti.Android.R.drawable.ic_menu_preferences,
+    //showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS,
+    title: 'Preferencias'
+},
+
+
+'#listView': {
+    backgroundColor: '#ffffff'
+},
+
+'#listItem': {
+    backgroundColor: '#ffffff',
+    top: '5dip',
+    bottom: '5dip',
+    left: '5dip',
+    right: '5dip',
+    layout: 'composite'
+},
+
+'#photo': {
+    left: '0dip',
+    height: '76dip',
+    width: '76dip',
+    borderRadius: 5
+},
+
+'#placeInfo': {
+    left: '86dip',
+    layout: 'horizontal',
+    height: Ti.UI.SIZE,
+    width: Ti.UI.FILL
+},
+
+'#name': {
+    width: Ti.UI.FILL,
+    height: Ti.UI.SIZE,
+    color: '#333333',
+    font: {
+        fontFamily: 'SourceSansPro-Regular',
+        fontSize: '21sp'
+    }
+},
+
+'#description': {
+    width: Ti.UI.FILL,
+    height: Ti.UI.SIZE,
+    color: '#545454',
+    font: {
+        fontFamily: 'SourceSansPro-Light',
+        fontSize: '17sp'
+    }
+}

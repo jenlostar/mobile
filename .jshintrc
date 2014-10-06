@@ -1,0 +1,14 @@
+{
+  "browser": false,
+  "indent": 4,
+  "strict": false,
+  "globals": {
+    "Ti": false,
+    "Titanium": false,
+    "Alloy": false,
+    "$": false,
+    "_": true,
+    "L": false
+  },
+  "node": true
+}

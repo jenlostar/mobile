@@ -1,5 +1,6 @@
-function doClick(e) {
-    alert($.label.text);
-}
+// function doClick(e) {
+//     alert($.label.text);
+// }
 
-$.index.open();
+// $.index.open();
+Alloy.createController('places');
