@@ -8,7 +8,7 @@
     //displayHomeAsUp: true,
     //backgroundImage: '/actionbackground.png'
     title: 'Mi Peluquería',
-    subtitle: 'Lugares disponibles'
+    // subtitle: 'Lugares disponibles'
 },
 
 '#preferences': {
@@ -19,11 +19,11 @@
 
 
 '#listView': {
-    backgroundColor: '#ffffff'
+    backgroundColor: '#FFF7F2'
 },
 
 '#listItem': {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#FFF7F2',
     top: '5dip',
     bottom: '5dip',
     left: '5dip',
@@ -31,15 +31,9 @@
     layout: 'composite'
 },
 
-'#photo': {
-    left: '0dip',
-    height: '76dip',
-    width: '76dip',
-    borderRadius: 5
-},
-
 '#placeInfo': {
-    left: '86dip',
+    left: '2dip',
+    right: '2dip',
     layout: 'horizontal',
     height: Ti.UI.SIZE,
     width: Ti.UI.FILL
@@ -48,19 +42,32 @@
 '#name': {
     width: Ti.UI.FILL,
     height: Ti.UI.SIZE,
-    color: '#333333',
+    color: '#33393F',
+    top: '3dip',
     font: {
-        fontFamily: 'SourceSansPro-Regular',
-        fontSize: '21sp'
+        fontFamily: 'SourceSansPro-Semibold',
+        fontSize: '20sp'
     }
 },
+
+'#address': {
+    width: Ti.UI.FILL,
+    height: Ti.UI.SIZE,
+    color: '#555555',
+    top: '3dip',
+    font: {
+        fontFamily: 'SourceSansPro-Light',
+        fontSize: '18sp'
+    }
+}
 
 '#description': {
     width: Ti.UI.FILL,
     height: Ti.UI.SIZE,
-    color: '#545454',
+    color: '#555555',
+    top: '3dip',
     font: {
         fontFamily: 'SourceSansPro-Light',
-        fontSize: '17sp'
+        fontSize: '18sp'
     }
 }

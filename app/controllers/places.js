@@ -9,10 +9,10 @@ function createListItem(item) {
     return {
         name: {text: item.name},
         description: {text: item.description},
-        photo: {image: pic},
+        address: {text: item.address},
         properties: {
             width: Ti.UI.FILL,
-            height: '96dip',
+            height: '110dip',
             backgroundColor: 'transparent',
             searchableText: item.name +' '+ item.description,
         }
@@ -59,6 +59,12 @@ search.addEventListener('change', function() {
 });
 
 $.places.addEventListener('open', function(e) {
+    var abx = require('com.alcoapps.actionbarextras');
+
+    abx.titleFont = 'SourceSansPro-Regular.ttf';
+    abx.backgroundColor = '#FF6600';
+    abx.titleColor = '#FFCEAF';
+
     $.places.activity.invalidateOptionsMenu();
 });
 

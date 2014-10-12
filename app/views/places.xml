@@ -8,9 +8,9 @@
             <Templates>
                 <ItemTemplate name="default">
                     <View id="listItem">
-                        <ImageView id="photo" bindId="photo" />
                         <View id="placeInfo">
                             <Label id="name" bindId="name"/>
+                            <Label id="address" bindId="address"/>
                             <Label id="description" bindId="description"/>
                         </View>
                     </View>
