@@ -3,6 +3,14 @@
     layout: 'vertical'
 },
 
+'#monthName': {
+    color: '#FFFFFF',
+    font: {
+        fontFamily: 'SourceSansPro-SemiBold',
+        fontSize: '22sp'
+    }
+},
+
 '#scheduleInfo': {
     width: Ti.UI.FILL,
     height: '70dip',

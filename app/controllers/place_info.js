@@ -1,6 +1,6 @@
 var place = arguments[0] || {};
 
-Ti.API.info('Place:', JSON.stringify(place));
+// Ti.API.info('Place:', JSON.stringify(place));
 
 function close() {
     $.place_info.close({animated: false});

@@ -2,6 +2,9 @@
 	<Window id="scheduleWindow">
         <ListView id="listView" defaultItemTemplate="default">
             <Templates>
+                <ItemTemplate name="month">
+                    <Label id="monthName" bindId="monthName"/>
+                </ItemTemplate>
                 <ItemTemplate name="default">
                     <View id="listItem">
                         <View id="scheduleInfo">
@@ -10,6 +13,7 @@
                                 <Label id="dayName" bindId="dayName"/>
                             </View>
                             <View id="hoursPane">
+
                             </View>
                         </View>
                     </View>
