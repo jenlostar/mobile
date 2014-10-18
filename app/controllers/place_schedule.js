@@ -1,50 +1,70 @@
-var args = arguments[0] || {},
-    moment = require('alloy/moment'),
-    now = new moment(),
-    lastMonth = null;
+var parametros = arguments[0] || {},
 
-function createListItem(schedule) {
-    return {
-        dayNumber: {text: schedule.day},
-        dayName: {text: schedule.name},
-        properties: {
-            width: Ti.UI.FILL,
-            height: '70dip',
-            backgroundColor: 'transparent'
+    fechaActual = new Date(),
+    anioActual = fechaActual.getFullYear(),
+    mesActual = fechaActual.getMonth(),
+    diaActual = fechaActual.getDate(),
+
+    fechaMinima = new Date(anioActual, mesActual, diaActual + 1),
+    fechaMaxima = new Date(anioActual, mesActual, diaActual + 15),
+
+    calendario = Ti.UI.createPicker({
+        type: Ti.UI.PICKER_TYPE_DATE,
+        minDate: fechaMinima,
+        maxDate: fechaMaxima,
+        value: fechaMinima
+    }),
+
+    fechaSeleccionada = fechaMinima;
+
+$.ventanaReservas.addEventListener('focus', function() {
+    calendario.showDatePickerDialog({
+        title: 'Seleccione un día',
+        okButtonTitle: 'Continuar',
+        callback: function(e) {
+            Ti.API.info(JSON.stringify(e));
+
+            if (e.cancel) {
+            } else {
+                cargarLista();
+            }
         }
-    };
-}
+    });
+});
 
-function createMonthItem(currentMonth) {
-    return {
-        template: 'month',
-        monthName: {text: currentMonth},
-        properties: {
-            width: Ti.UI.FILL,
-            height: '35dip',
-            backgroundColor: '#FF6600'
+$.ventanaReservas.addEventListener('blur', function() {
+    calendario.showDatePickerDialog({
+        title: 'Seleccione un día',
+        okButtonTitle: 'Continuar',
+        callback: function(e) {
+            cargarLista();
         }
-    };
-}
+    });
+});
 
-function loadData() {
-    var schedules = [];
+function cargarLista() {
 
-    for (var i = 0 ; i < 16 ; i++) {
-        now.add(1, 'day');
+    var horasDia = [],
+        moment = require('alloy/moment'),
+        horaInicial = new moment(fechaSeleccionada).add(7, 'hours'),
+        horaFinal = new moment(fechaSeleccionada).add(23, 'hours');
 
-        var schedule = {day: now.format('DD'), name: now.format('ddd')},
-            currentMonth = now.format('MMMM');
+    Ti.API.info(JSON.stringify(horaInicial));
 
-        if (lastMonth != currentMonth) {
-            schedules.push(createMonthItem(currentMonth));
-            lastMonth = currentMonth;
-        }
+    while (horaInicial.diff(horaFinal) <= 0) {
+        horasDia.push({
+            hora: {text: horaInicial.format('hh:mm A')},
+            estado: {text: 'Disponible'},
+            properties: {
+                width: Ti.UI.FILL,
+                height: '70dip',
+                backgroundColor: 'transparent',
+                layout: 'horizontal'
+            }
+        });
 
-        schedules.push(createListItem(schedule));
+        horaInicial.add(30, 'minutes');
     }
 
-    $.section.setItems(schedules);
+    $.seccionLista.setItems(horasDia);
 }
-
-loadData();

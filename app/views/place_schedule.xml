@@ -1,25 +1,13 @@
 <Alloy>
-	<Window id="scheduleWindow">
-        <ListView id="listView" defaultItemTemplate="default">
+	<Window id="ventanaReservas">
+        <ListView id="controlVista" defaultItemTemplate="default">
             <Templates>
-                <ItemTemplate name="month">
-                    <Label id="monthName" bindId="monthName"/>
-                </ItemTemplate>
                 <ItemTemplate name="default">
-                    <View id="listItem">
-                        <View id="scheduleInfo">
-                            <View id="dayPane">
-                                <Label id="dayNumber" bindId="dayNumber"/>
-                                <Label id="dayName" bindId="dayName"/>
-                            </View>
-                            <View id="hoursPane">
-
-                            </View>
-                        </View>
-                    </View>
+                    <Label id="hora" bindId="hora"/>
+                    <Label id="estado" bindId="estado"/>
                 </ItemTemplate>
             </Templates>
-            <ListSection id="section" />
+            <ListSection id="seccionLista" />
         </ListView>
     </Window>
 </Alloy>
