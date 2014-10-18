@@ -1,0 +1,87 @@
+'#homeWindow' : {
+    backgroundColor: '#FFF7F2',
+    layout: 'vertical'
+},
+
+'#gallery': {
+    width: Ti.UI.FILL,
+    height: Ti.UI.SIZE,
+    layout: 'horizontal',
+    scrollType: 'horizontal'
+},
+
+'.placeImage': {
+    width: Ti.UI.SIZE,
+},
+
+
+'#detail': {
+    width: Ti.UI.FILL,
+    height: Ti.UI.SIZE,
+    left: '8dip',
+    right: '8dip',
+    layout: 'vertical',
+},
+
+'#placeName':{
+    width: Ti.UI.FILL,
+    height: Ti.UI.SIZE,
+    color: '#555555',
+    top: '3dip',
+    font: {
+        fontFamily: 'SourceSansPro-Semibold',
+        fontSize: '22sp'
+    }
+},
+
+'#placeDescription':{
+    width: Ti.UI.FILL,
+    height: Ti.UI.SIZE,
+    color: '#555555',
+    top: '5dip',
+    font: {
+        fontFamily: 'SourceSansPro-Light',
+        fontSize: '19sp'
+    }
+},
+
+'.row': {
+    top: '10dip',
+    layout: 'composite',
+    width: Ti.UI.FILL,
+    height: Ti.UI.SIZE
+},
+
+'.font-lg': {
+    color: '#555555',
+    left: '0dip',
+    width: '20dip',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    font: {
+        fontSize:'22sp'
+    }
+},
+
+'.field': {
+    left: '22dip',
+},
+
+'#placeAddress':{
+    width: Ti.UI.FILL,
+    height: Ti.UI.SIZE,
+    color: '#555555',
+    font: {
+        fontFamily: 'SourceSansPro-Light',
+        fontSize: '19sp'
+    }
+},
+
+'#placePhone':{
+    width: Ti.UI.FILL,
+    height: Ti.UI.SIZE,
+    color: '#555555',
+    font: {
+        fontFamily: 'SourceSansPro-Light',
+        fontSize: '19sp'
+    }
+}

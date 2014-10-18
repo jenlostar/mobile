@@ -1,0 +1,22 @@
+<Alloy>
+	<Window id="homeWindow">
+       <ScrollView id="gallery">
+            <ImageView id="image1" class="placeImage"/>
+            <ImageView id="image2" class="placeImage"/>
+            <ImageView id="image3" class="placeImage"/>
+        </ScrollView>
+        <ScrollView id="detail">
+            <Label id="placeName" />
+            <Label id="placeDescription" />
+            <View class="row">
+                <Label class="font-lg" icon="fa-map-marker"/>
+                <Label class="field" id="placeAddress" />
+            </View>
+            <View class="row">
+                <Label class="font-lg" icon="fa-phone"/>
+                <Label class="field" id="placePhone" />
+            </View>
+            <Widget id="fa" src="com.mattmcfarland.fontawesome"/>
+        </ScrollView>
+    </Window>
+</Alloy>

@@ -1,0 +1,4 @@
+'#servicesWindow' : {
+    backgroundColor: '#FFF7F2',
+    layout: 'vertical'
+}

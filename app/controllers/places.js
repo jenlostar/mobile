@@ -7,6 +7,7 @@ function createListItem(item) {
     var pic = 'http://placeimg.com/100/100/people/.jpg?_='+item.id;
 
     return {
+        data: item,
         name: {text: item.name},
         description: {text: item.description},
         address: {text: item.address},
@@ -14,43 +15,61 @@ function createListItem(item) {
             width: Ti.UI.FILL,
             height: '110dip',
             backgroundColor: 'transparent',
+            selectedBackgroundColor: '#FF6600',
             searchableText: item.name +' '+ item.description,
         }
     };
 }
 
 function processResponse(response) {
-    var items = [];
+    var places = [];
 
-    _.each(response, function(item) {
-        items.push(createListItem(item));
+    _.each(response, function(place) {
+        if (place.schedules.length > 0) {
+            places.push(createListItem(place));
+        }
     });
 
-    $.section.appendItems(items);
+    $.section.setItems(places);
 }
 
 function processError() {
 }
 
- var xhr = Ti.Network.createHTTPClient({
-    onload: function(e) {
-        var json = JSON.parse(this.responseText);
-        processResponse(json);
-        json = null;
-    },
-    onerror: function(e) {
-        Ti.API.debug(e.error);
-        alert('error');
-    },
-    timeout: 5000
-});
+
+function loadData() {
+    $.activityIndicator.show();
+    var xhr = Ti.Network.createHTTPClient({
+        onload: function(e) {
+            var json = JSON.parse(this.responseText);
+            processResponse(json);
+            json = null;
+            $.activityIndicator.hide();
+            $.toast.hide();
+        },
+        onerror: function(e) {
+            Ti.API.debug(e.error);
+            alert('error');
+            $.activityIndicator.hide();
+        },
+        timeout: 15000
+    });
+
+    xhr.open('GET', Alloy.CFG.API_URL + '/places');
+    xhr.send();
+}
+
 
 $.places.activity.onCreateOptionsMenu = function(e) {
     e.menu.add({
         title: 'Buscar lugar',
         icon: Ti.Android.R.drawable.ic_menu_search,
         actionView : search,
-        showAsAction: Ti.Android.SHOW_AS_ACTION_IF_ROOM | Ti.Android.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW
+        showAsAction: Ti.Android.SHOW_AS_ACTION_IF_ROOM
+    });
+
+    e.menu.add({title: 'Actualizar'}).addEventListener('click', function(e) {
+        loadData();
     });
 };
 
@@ -61,14 +80,19 @@ search.addEventListener('change', function() {
 $.places.addEventListener('open', function(e) {
     var abx = require('com.alcoapps.actionbarextras');
 
-    abx.titleFont = 'SourceSansPro-Regular.ttf';
-    abx.backgroundColor = '#FF6600';
+    abx.title = 'Mi Peluquería';
+    abx.titleFont = 'SourceSansPro-Black.ttf';
     abx.titleColor = '#FFCEAF';
 
     $.places.activity.invalidateOptionsMenu();
 });
 
-$.places.open();
+$.listView.addEventListener('itemclick', function(e) {
+    var item = e.section.getItemAt(e.itemIndex);
+    Alloy.createController('place_info', item.data);
+});
 
-xhr.open('GET', Alloy.CFG.API_URL + '/places');
-xhr.send();
+$.places.open();
+$.toast.show();
+
+loadData();

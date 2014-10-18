@@ -1,7 +1,9 @@
 {
   "browser": false,
   "indent": 4,
+  "quotmark": true,
   "strict": false,
+  "undef": true,
   "globals": {
     "Ti": false,
     "Titanium": false,
@@ -10,5 +12,6 @@
     "_": true,
     "L": false
   },
+  "devel": true,
   "node": true
 }

@@ -1,0 +1,13 @@
+<Alloy>
+     <TabGroup backgroundColor="white" >
+        <Tab id="tab1" title="Inicio">
+            <Require src="place_home" id="home"/>
+        </Tab>
+        <Tab id="tab2" title="Servicios">
+            <Require src="place_services" id="services"/>
+        </Tab>
+        <Tab id="tab3" title="Disponibilidad">
+            <Require src="place_schedule" id="schedule"/>
+        </Tab>
+    </TabGroup>
+</Alloy>

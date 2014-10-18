@@ -1,9 +1,5 @@
 <Alloy>
     <Window class="container">
-        <ActionBar id="actionbar"/>
-        <!-- <Menu id="menu"> -->
-            <!-- <MenuItem id="preferences"/> -->
-        <!-- </Menu> -->
         <ListView id="listView" defaultItemTemplate="default">
             <Templates>
                 <ItemTemplate name="default">
@@ -18,5 +14,7 @@
             </Templates>
             <ListSection id="section" />
         </ListView>
+        <ActivityIndicator id="activityIndicator"/>
+        <Notification id="toast" message="Cargando..." duration="Ti.UI.NOTIFICATION_DURATION_SHORT" />
     </Window>
 </Alloy>

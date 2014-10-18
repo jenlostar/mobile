@@ -1,0 +1,48 @@
+'#scheduleWindow' : {
+    backgroundColor: '#FFF7F2',
+    layout: 'vertical'
+},
+
+'#scheduleInfo': {
+    width: Ti.UI.FILL,
+    height: '70dip',
+    layout: 'horizontal',
+    backgroundColor: '#FFF7F2'
+},
+
+'#dayPane': {
+    layout: 'vertical',
+    width: '70dip',
+    height: '70dip',
+    backgroundColor: '#FF6600'
+},
+
+'#dayNumber': {
+    width: '70dip',
+    height: Ti.UI.SIZE,
+    color: '#FFFFFF',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    font: {
+        fontFamily: 'SourceSansPro-SemiBold',
+        fontSize: '28sp'
+    }
+},
+
+'#dayName': {
+    width: '70dip',
+    height: Ti.UI.SIZE,
+    color: '#FFFFFF',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    font: {
+        fontFamily: 'SourceSansPro-SemiBold',
+        fontSize: '24sp'
+    }
+},
+
+'#hoursPane': {
+    layout: 'vertical',
+    width: Ti.UI.FILL,
+    height: Ti.UI.FILL,
+    backgroundColor: '#FFF7F2'
+}
+

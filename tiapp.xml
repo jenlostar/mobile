@@ -22,7 +22,7 @@
                          android:label="@string/app_name"
                          android:name="MipeluqueriaApplication"
                          android:debuggable="false"
-                         android:theme="@style/LightDarkBar">
+                         android:theme="@style/Theme.Orange">
                 <activity android:name=".MipeluqueriaActivity"
                           android:label="@string/app_name"
                           android:screenOrientation="nosensor"

@@ -1,6 +1,6 @@
 // http://androiddrawables.com/Menu.html
 '.container' : {
-
+    backgroundColor: '#FFF7F2'
 },
 
 '#actionbar': {

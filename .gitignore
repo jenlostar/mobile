@@ -9,3 +9,4 @@ tmp
 .settings
 Thumbs.db
 mobile.sublime-workspace
+plugins/ti.alloy/hooks/alloy.js
