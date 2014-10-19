@@ -1,21 +1,21 @@
-'#homeWindow' : {
+'#windowInicio' : {
     backgroundColor: '#FFF7F2',
     layout: 'vertical'
 },
 
-'#gallery': {
+'#fotos': {
     width: Ti.UI.FILL,
     height: Ti.UI.SIZE,
     layout: 'horizontal',
     scrollType: 'horizontal'
 },
 
-'.placeImage': {
+'.imagenLugar': {
     width: Ti.UI.SIZE,
 },
 
 
-'#detail': {
+'#detalle': {
     width: Ti.UI.FILL,
     height: Ti.UI.SIZE,
     left: '8dip',
@@ -23,7 +23,7 @@
     layout: 'vertical',
 },
 
-'#placeName':{
+'#nombreLugar':{
     width: Ti.UI.FILL,
     height: Ti.UI.SIZE,
     color: '#555555',
@@ -34,7 +34,7 @@
     }
 },
 
-'#placeDescription':{
+'#descripcionLugar':{
     width: Ti.UI.FILL,
     height: Ti.UI.SIZE,
     color: '#555555',
@@ -66,7 +66,7 @@
     left: '22dip',
 },
 
-'#placeAddress':{
+'#direccionLugar':{
     width: Ti.UI.FILL,
     height: Ti.UI.SIZE,
     color: '#555555',
@@ -76,7 +76,7 @@
     }
 },
 
-'#placePhone':{
+'#telefonoLugar':{
     width: Ti.UI.FILL,
     height: Ti.UI.SIZE,
     color: '#555555',

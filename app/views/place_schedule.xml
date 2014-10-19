@@ -1,6 +1,6 @@
 <Alloy>
 	<Window id="ventanaReservas">
-        <ListView id="controlVista" defaultItemTemplate="default">
+        <ListView id="controlLista" defaultItemTemplate="default">
             <Templates>
                 <ItemTemplate name="default">
                     <Label id="hora" bindId="hora"/>

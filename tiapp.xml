@@ -47,6 +47,7 @@
     <mobileweb />
     <modules>
          <module platform="android">com.alcoapps.actionbarextras</module>
+         <module platform="android">titutorial.ratingbar</module>
     </modules>
     <deployment-targets>
         <target device="android">true</target>

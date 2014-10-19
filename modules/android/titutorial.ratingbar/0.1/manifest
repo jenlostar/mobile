@@ -1,0 +1,18 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 0.1
+apiversion: 2
+description: A RatingBar is an extension that shows a rating in stars
+author: Karthi Ponnusamy
+license: Specify your license
+copyright: Copyright (c) 2013 by TitaniumTutorial
+
+
+# these should not be edited
+name: ratingbar
+moduleid: titutorial.ratingbar
+guid: e76d3442-4ae8-494b-97aa-37b4ddc68ee9
+platform: android
+minsdk: 3.0.0.GA

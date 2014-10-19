@@ -1,7 +1,7 @@
 <Alloy>
      <TabGroup backgroundColor="white" >
         <Tab id="tab1" title="Inicio">
-            <Require src="place_home" id="home"/>
+            <Require src="place_home" id="inicio"/>
         </Tab>
         <Tab id="tab2" title="Servicios">
             <Require src="place_services" id="services"/>

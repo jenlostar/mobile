@@ -22,21 +22,6 @@ $.ventanaReservas.addEventListener('focus', function() {
         title: 'Seleccione un día',
         okButtonTitle: 'Continuar',
         callback: function(e) {
-            Ti.API.info(JSON.stringify(e));
-
-            if (e.cancel) {
-            } else {
-                cargarLista();
-            }
-        }
-    });
-});
-
-$.ventanaReservas.addEventListener('blur', function() {
-    calendario.showDatePickerDialog({
-        title: 'Seleccione un día',
-        okButtonTitle: 'Continuar',
-        callback: function(e) {
             cargarLista();
         }
     });
@@ -68,3 +53,7 @@ function cargarLista() {
 
     $.seccionLista.setItems(horasDia);
 }
+
+$.controlLista.addEventListener('itemclick', function() {
+
+});

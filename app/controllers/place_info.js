@@ -1,8 +1,6 @@
 var place = arguments[0] || {};
 
-// Ti.API.info('Place:', JSON.stringify(place));
-
-function close() {
+function cerrar() {
     $.place_info.close({animated: false});
     $.place_info = null;
 }
@@ -17,16 +15,16 @@ $.place_info.addEventListener('open', function(e) {
     $.place_info.activity.invalidateOptionsMenu();
 });
 
-$.home.image1.image = 'http://fpoimg.com/420x340?text=MiPeluqueria1';
-$.home.image2.image = 'http://fpoimg.com/420x340?text=MiPeluqueria2';
-$.home.image3.image = 'http://fpoimg.com/420x340?text=MiPeluqueria3';
+$.inicio.imagen1.image = 'http://fpoimg.com/420x340?text=MiPeluqueria1';
+$.inicio.imagen2.image = 'http://fpoimg.com/420x340?text=MiPeluqueria2';
+$.inicio.imagen3.image = 'http://fpoimg.com/420x340?text=MiPeluqueria3';
 
-$.home.placeName.text = place.name;
-$.home.placeDescription.text = place.description;
-$.home.placeAddress.text = place.address;
-$.home.placePhone.text = place.land_line+' - '+place.mobile_phone;
+$.inicio.nombreLugar.text = place.name;
+$.inicio.descripcionLugar.text = place.description;
+$.inicio.direccionLugar.text = place.address;
+$.inicio.telefonoLugar.text = place.land_line+' - '+place.mobile_phone;
 
-$.place_info.addEventListener('android:back', close);
+$.place_info.addEventListener('android:back', cerrar);
 
 $.place_info.open({animated: false});
 
