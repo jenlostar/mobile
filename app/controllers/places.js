@@ -59,7 +59,6 @@ function loadData() {
     xhr.send();
 }
 
-
 $.places.activity.onCreateOptionsMenu = function(e) {
     e.menu.add({
         title: 'Buscar lugar',
@@ -89,6 +88,7 @@ $.places.addEventListener('open', function(e) {
 
 $.listView.addEventListener('itemclick', function(e) {
     var item = e.section.getItemAt(e.itemIndex);
+    Alloy.Globals.lugar = item.data;
     Alloy.createController('place_info', item.data);
 });
 

@@ -48,6 +48,7 @@
     <modules>
          <module platform="android">com.alcoapps.actionbarextras</module>
          <module platform="android">titutorial.ratingbar</module>
+         <module platform="android">yy.tidialogs</module>
     </modules>
     <deployment-targets>
         <target device="android">true</target>
