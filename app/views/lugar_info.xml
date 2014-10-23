@@ -1,13 +1,13 @@
 <Alloy>
      <TabGroup backgroundColor="white" >
         <Tab id="tab1" title="Inicio">
-            <Require src="place_home" id="inicio"/>
+            <Require src="lugar_inicio" id="inicio"/>
         </Tab>
         <Tab id="tab2" title="Servicios">
-            <Require src="place_services" id="services"/>
+            <Require src="lugar_servicios" id="servicios"/>
         </Tab>
         <Tab id="tab3" title="Reservar">
-            <Require src="place_schedule" id="schedule"/>
+            <Require src="lugar_horario" id="horario"/>
         </Tab>
     </TabGroup>
 </Alloy>

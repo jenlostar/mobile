@@ -1,5 +1,5 @@
 // http://androiddrawables.com/Menu.html
-'.container' : {
+'.contenedor' : {
     backgroundColor: '#FFF7F2'
 },
 
@@ -18,11 +18,11 @@
 },
 
 
-'#listView': {
+'#lista': {
     backgroundColor: '#FFF7F2'
 },
 
-'#listItem': {
+'#elementoLista': {
     backgroundColor: '#FFF7F2',
     top: '5dip',
     bottom: '5dip',
@@ -31,7 +31,7 @@
     layout: 'composite'
 },
 
-'#placeInfo': {
+'#infoLugar': {
     left: '2dip',
     right: '2dip',
     layout: 'horizontal',
@@ -39,7 +39,7 @@
     width: Ti.UI.FILL
 },
 
-'#name': {
+'#nombre': {
     width: Ti.UI.FILL,
     height: Ti.UI.SIZE,
     color: '#33393F',
@@ -50,7 +50,7 @@
     }
 },
 
-'#address': {
+'#direccion': {
     width: Ti.UI.FILL,
     height: Ti.UI.SIZE,
     color: '#555555',
@@ -61,7 +61,7 @@
     }
 }
 
-'#description': {
+'#descripcion': {
     width: Ti.UI.FILL,
     height: Ti.UI.SIZE,
     color: '#555555',

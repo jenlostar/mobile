@@ -1,4 +1,4 @@
-'#windowInicio' : {
+'#ventanaInicio' : {
     backgroundColor: '#FFF7F2',
     layout: 'vertical'
 },
@@ -45,7 +45,7 @@
     }
 },
 
-'.row': {
+'.fila': {
     top: '10dip',
     layout: 'composite',
     width: Ti.UI.FILL,
@@ -62,7 +62,7 @@
     }
 },
 
-'.field': {
+'.campo': {
     left: '22dip',
 },
 

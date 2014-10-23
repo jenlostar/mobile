@@ -1,4 +1,4 @@
-'#servicesWindow' : {
+'#ventanaServicios' : {
     backgroundColor: '#FFF7F2',
     layout: 'vertical'
 }

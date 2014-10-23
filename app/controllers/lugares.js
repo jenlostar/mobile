@@ -1,16 +1,16 @@
-var args = arguments[0] || {},
-    search = Ti.UI.Android.createSearchView({
-         hintText : 'Buscar'
+var parametros = arguments[0] || {},
+    buscar = Ti.UI.Android.createSearchView({
+        hintText : 'Buscar'
     });
 
-function createListItem(item) {
+function crearElementoLista(item) {
     var pic = 'http://placeimg.com/100/100/people/.jpg?_='+item.id;
 
     return {
         data: item,
-        name: {text: item.name},
-        description: {text: item.description},
-        address: {text: item.address},
+        nombre: {text: item.name},
+        descripcion: {text: item.description},
+        direccion: {text: item.address},
         properties: {
             width: Ti.UI.FILL,
             height: '110dip',
@@ -21,36 +21,36 @@ function createListItem(item) {
     };
 }
 
-function processResponse(response) {
-    var places = [];
+function procesarRespuesta(respuesta) {
+    var lugares = [];
 
-    _.each(response, function(place) {
-        if (place.schedules.length > 0) {
-            places.push(createListItem(place));
+    _.each(respuesta, function(lugar) {
+        if (lugar.schedules.length > 0) {
+            lugares.push(crearElementoLista(lugar));
         }
     });
 
-    $.section.setItems(places);
+    $.seccion.setItems(lugares);
 }
 
-function processError() {
+function procesarError() {
 }
 
 
-function loadData() {
-    $.activityIndicator.show();
+function cargarDatos() {
+    $.indicadorActividad.show();
     var xhr = Ti.Network.createHTTPClient({
         onload: function(e) {
             var json = JSON.parse(this.responseText);
-            processResponse(json);
+            procesarRespuesta(json);
             json = null;
-            $.activityIndicator.hide();
+            $.indicadorActividad.hide();
             $.toast.hide();
         },
         onerror: function(e) {
             Ti.API.debug(e.error);
             alert('error');
-            $.activityIndicator.hide();
+            $.indicadorActividad.hide();
         },
         timeout: 15000
     });
@@ -59,40 +59,40 @@ function loadData() {
     xhr.send();
 }
 
-$.places.activity.onCreateOptionsMenu = function(e) {
+$.lugares.activity.onCreateOptionsMenu = function(e) {
     e.menu.add({
         title: 'Buscar lugar',
         icon: Ti.Android.R.drawable.ic_menu_search,
-        actionView : search,
+        actionView : buscar,
         showAsAction: Ti.Android.SHOW_AS_ACTION_IF_ROOM
     });
 
     e.menu.add({title: 'Actualizar'}).addEventListener('click', function(e) {
-        loadData();
+        cargarDatos();
     });
 };
 
-search.addEventListener('change', function() {
-    $.listView.setSearchText(search.value);
+buscar.addEventListener('change', function() {
+    $.lista.setSearchText(buscar.value);
 });
 
-$.places.addEventListener('open', function(e) {
+$.lugares.addEventListener('open', function(e) {
     var abx = require('com.alcoapps.actionbarextras');
 
     abx.title = 'Mi Peluquería';
     abx.titleFont = 'SourceSansPro-Black.ttf';
     abx.titleColor = '#FFCEAF';
 
-    $.places.activity.invalidateOptionsMenu();
+    $.lugares.activity.invalidateOptionsMenu();
 });
 
-$.listView.addEventListener('itemclick', function(e) {
+$.lista.addEventListener('itemclick', function(e) {
     var item = e.section.getItemAt(e.itemIndex);
     Alloy.Globals.lugar = item.data;
-    Alloy.createController('place_info', item.data);
+    Alloy.createController('lugar_info', item.data);
 });
 
-$.places.open();
+$.lugares.open();
 $.toast.show();
 
-loadData();
+cargarDatos();
