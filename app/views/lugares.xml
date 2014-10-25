@@ -1,0 +1,20 @@
+<Alloy>
+    <Window class="contenedor">
+        <ListView id="lista" defaultItemTemplate="default">
+            <Templates>
+                <ItemTemplate name="default">
+                    <View id="elementoLista">
+                        <View id="infoLugar">
+                            <Label id="nombre" bindId="nombre"/>
+                            <Label id="direccion" bindId="direccion"/>
+                            <Label id="descripcion" bindId="descripcion"/>
+                        </View>
+                    </View>
+                </ItemTemplate>
+            </Templates>
+            <ListSection id="seccion" />
+        </ListView>
+        <ActivityIndicator id="indicadorActividad"/>
+        <Notification id="toast" message="Cargando..." duration="Ti.UI.NOTIFICATION_DURATION_SHORT" />
+    </Window>
+</Alloy>

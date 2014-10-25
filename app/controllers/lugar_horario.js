@@ -82,15 +82,15 @@ function dialogoTiposServicio(e) {
 
     horaSeleccionada = e.section.getItemAt(e.itemIndex).fecha;
 
-    var dialog = Ti.UI.createOptionDialog({
+    var ventanaDialogo = Ti.UI.createOptionDialog({
         persistent: true,
         title: 'Tipo de servicio',
         options: tiposServicio,
         buttonNames: ['Cancelar']
     });
 
-    dialog.addEventListener('click', dialogoServicios);
-    dialog.show();
+    ventanaDialogo.addEventListener('click', dialogoServicios);
+    ventanaDialogo.show();
 }
 
 function dialogoServicios(e) {

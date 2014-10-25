@@ -3,4 +3,4 @@
 // }
 
 // $.index.open();
-Alloy.createController('places');
+Alloy.createController('lugares');

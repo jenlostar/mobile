@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="windowInicio">
+	<Window id="ventanaInicio">
        <ScrollView id="fotos">
             <ImageView id="imagen1" class="imagenLugar"/>
             <ImageView id="imagen2" class="imagenLugar"/>
@@ -8,13 +8,13 @@
         <ScrollView id="detalle">
             <Label id="nombreLugar" />
             <Label id="descripcionLugar" />
-            <View class="row">
+            <View class="fila">
                 <Label class="font-lg" icon="fa-map-marker"/>
-                <Label class="field" id="direccionLugar" />
+                <Label class="campo" id="direccionLugar" />
             </View>
-            <View class="row">
+            <View class="fila">
                 <Label class="font-lg" icon="fa-phone"/>
-                <Label class="field" id="telefonoLugar" />
+                <Label class="campo" id="telefonoLugar" />
             </View>
 
             <Widget id="fa" src="com.mattmcfarland.fontawesome"/>
