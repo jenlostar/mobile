@@ -1,5 +1,6 @@
 var parametros = arguments[0] || {};
 
+var moment = require('alloy/moment');
 var fechaActual = new Date();
 var anioActual = fechaActual.getFullYear();
 var mesActual = fechaActual.getMonth();
@@ -7,14 +8,8 @@ var diaActual = fechaActual.getDate();
 var fechaMinima = new Date(anioActual, mesActual, diaActual + 1, 7, 0, 0);
 var fechaMaxima = new Date(anioActual, mesActual, diaActual + 15, 7, 0, 0);
 
-var calendario = Ti.UI.createPicker({
-    type: Ti.UI.PICKER_TYPE_DATE,
-    minDate: fechaMinima,
-    maxDate: fechaMaxima,
-    value: fechaMinima
-});
-
 var fechaSeleccionada = fechaMinima;
+
 var servicios = _.groupBy(Alloy.Globals.lugar.services, 'kind');
 var tiposServicio = _.map(_.keys(servicios), function(servicio) {
     return servicio;
@@ -23,10 +18,8 @@ var tiposServicio = _.map(_.keys(servicios), function(servicio) {
 var dialogoAbierto = false;
 var horaSeleccionada = null;
 
-function cargarLista(fechaSeleccionada) {
-
+function cargarLista() {
     var horasDia = [],
-        moment = require('alloy/moment'),
         horaInicial = new moment(fechaSeleccionada).startOf('day').add(7, 'hours'),
         horaFinal = new moment(fechaSeleccionada).startOf('day').add(22, 'hours');
 
@@ -140,14 +133,37 @@ function dialogoServicios(e) {
     listadoServicios.show();
 }
 
+function actualizarInfoNavegacion() {
+    var abx = require('com.alcoapps.actionbarextras'),
+        fechaActual = new moment(fechaSeleccionada);
+
+    abx.subtitle = fechaActual.format('dddd Do');
+    abx.subtitleFont = 'SourceSansPro-Semibold.ttf';
+    abx.subtitleColor = '#FFCEAF';
+
+    $.diaActualNavegacion.text = fechaActual.format('dddd Do');
+}
+
+cargarLista();
+
+require('ui').touchFeedbackNavigation($.anterior, $.siguiente);
+
 $.ventanaReservas.addEventListener('focus', function() {
-    calendario.showDatePickerDialog({
-        title: 'Seleccione un día',
-        okButtonTitle: 'Continuar',
-        callback: function(e) {
-            cargarLista(e.value);
-        }
-    });
+    actualizarInfoNavegacion();
+});
+
+$.siguiente.addEventListener('click', function() {
+    var diaSiguiente = new moment(fechaSeleccionada).startOf('day').add(1, 'day');
+    fechaSeleccionada = diaSiguiente.toDate();
+    actualizarInfoNavegacion();
+    cargarLista();
+});
+
+$.anterior.addEventListener('click', function() {
+    var diaAnterior = new moment(fechaSeleccionada).startOf('day').subtract(1, 'day');
+    fechaSeleccionada = diaAnterior.toDate();
+    actualizarInfoNavegacion();
+    cargarLista();
 });
 
 $.controlLista.addEventListener('itemclick', dialogoTiposServicio);

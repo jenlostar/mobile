@@ -9,5 +9,11 @@
             </Templates>
             <ListSection id="seccionLista" />
         </ListView>
+        <View id="navegacion">
+            <Label id="anterior" class="font-navegacion" icon="fa-angle-left"/>
+            <Label id="diaActualNavegacion" />
+            <Label id="siguiente" class="font-navegacion" icon="fa-angle-right"/>
+            <Widget id="fa" src="com.mattmcfarland.fontawesome"/>
+        </View>
     </Window>
 </Alloy>

@@ -1,6 +1,12 @@
 '#ventanaReservas' : {
     backgroundColor: '#FFF7F2',
-    layout: 'vertical'
+    layout: 'composite'
+},
+
+'#controlLista': {
+    width: Ti.UI.FILL,
+    height: Ti.UI.FILL,
+    bottom: '48dip'
 },
 
 '#hora': {
@@ -25,4 +31,39 @@
         fontFamily: 'SourceSansPro-Light',
         fontSize: '24sp'
     }
+},
+
+'#navegacion': {
+    bottom: '0dip',
+    width: Ti.UI.FILL,
+    height: '48dip',
+    backgroundColor: '#FFBB33',
+    layout: 'composite'
+},
+
+'.font-navegacion': {
+    color: '#FFFFFF',
+    width: '48dip',
+    height: Ti.UI.FILL,
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    font: {
+        fontSize:'28sp'
+    }
+},
+
+'#anterior': {
+    left: '0dip'
+},
+
+'#diaActualNavegacion': {
+    backgroundColor: 'transparent',
+    color: '#FFFFFF',
+    font: {
+        fontFamily: 'SourceSansPro-Semibold',
+        fontSize: '18sp'
+    }
+},
+
+'#siguiente': {
+    right: '0dip'
 }
