@@ -14,6 +14,7 @@
   "os:ios": {},
   "os:mobileweb": {},
   "dependencies": {
-    "com.mattmcfarland.fontawesome": "1.3.0"
+    "com.mattmcfarland.fontawesome": "1.3.0",
+    "com.caffeinalab.titanium.loader": "*"
   }
 }

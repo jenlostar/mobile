@@ -10,3 +10,8 @@
 //
 // Alloy.Globals.someGlobalFunction = function(){};
 Alloy.Globals.lugar = null;
+
+Alloy.Globals.LO = Alloy.createWidget('com.caffeinalab.titanium.loader', {
+    cancelable: true,
+    useImages: false
+});

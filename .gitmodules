@@ -1,0 +1,3 @@
+[submodule "app/widgets/com.caffeinalab.titanium.loader"]
+	path = app/widgets/com.caffeinalab.titanium.loader
+	url = git@github.com:CaffeinaLab/Ti.Loader.git
