@@ -19,7 +19,6 @@
 },
 
 '#email': {
-    value: 'cristiandavid.cepeda@gmail.com',
     autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
     keyboardType: Ti.UI.KEYBOARD_EMAIL,
     width: '100%',
@@ -31,7 +30,6 @@
 },
 
 '#clave': {
-    value: '12345',
     passwordMask: true,
     returnKeyType: Ti.UI.RETURNKEY_DONE,
     top: '15dip',
