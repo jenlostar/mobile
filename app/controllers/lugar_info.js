@@ -21,7 +21,11 @@ $.inicio.imagen3.image = 'http://fpoimg.com/420x340?text=MiPeluqueria3';
 $.inicio.nombreLugar.text = lugar.name;
 $.inicio.descripcionLugar.text = lugar.description;
 $.inicio.direccionLugar.text = lugar.address;
-$.inicio.telefonoLugar.text = lugar.land_line+' - '+lugar.mobile_phone;
+$.inicio.telefonoLugar.text = lugar.land_line;
+
+if (lugar.mobile_phone) {
+    $.inicio.telefonoLugar.text += ' - '+lugar.mobile_phone;
+}
 
 $.lugar_info.addEventListener('android:back', cerrar);
 

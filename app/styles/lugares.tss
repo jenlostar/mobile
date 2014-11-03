@@ -46,20 +46,9 @@
     top: '3dip',
     font: {
         fontFamily: 'SourceSansPro-Semibold',
-        fontSize: '20sp'
+        fontSize: '21sp'
     }
 },
-
-'#direccion': {
-    width: Ti.UI.FILL,
-    height: Ti.UI.SIZE,
-    color: '#555555',
-    top: '3dip',
-    font: {
-        fontFamily: 'SourceSansPro-Light',
-        fontSize: '18sp'
-    }
-}
 
 '#descripcion': {
     width: Ti.UI.FILL,
