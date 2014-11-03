@@ -1,6 +1,8 @@
 var parametros = arguments[0] || {};
 
 var moment = require('alloy/moment');
+moment().lang('es');
+
 var fechaActual = new Date();
 var anioActual = fechaActual.getFullYear();
 var mesActual = fechaActual.getMonth();
@@ -77,6 +79,7 @@ function dialogoTiposServicio(e) {
 
     var ventanaDialogo = Ti.UI.createOptionDialog({
         persistent: true,
+        cancel: -1,
         title: 'Tipo de servicio',
         options: tiposServicio,
         buttonNames: ['Cancelar']

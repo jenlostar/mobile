@@ -1,4 +1,17 @@
 <Alloy>
     <Window id="ventanaServicios">
+        <ListView id="controlLista" defaultItemTemplate="default">
+            <Templates>
+                <ItemTemplate name="tipoServicio">
+                    <Label id="tipoServicio" bindId="tipoServicio"/>
+                </ItemTemplate>
+                <ItemTemplate name="default">
+                    <Label id="nombre" bindId="nombre"/>
+                    <Label id="valor" bindId="valor"/>
+                    <Label id="tiempoEstimado" bindId="tiempoEstimado"/>
+                </ItemTemplate>
+            </Templates>
+            <ListSection id="seccionLista" />
+        </ListView>
     </Window>
 </Alloy>

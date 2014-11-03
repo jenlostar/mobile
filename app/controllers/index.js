@@ -3,4 +3,8 @@
 // }
 
 // $.index.open();
-Alloy.createController('lugares');
+// Alloy.createController('lugares');
+
+if (!Ti.App.Properties.getBool('registrado', false)) {
+    Alloy.createController('entrar');
+}

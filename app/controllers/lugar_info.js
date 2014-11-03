@@ -8,7 +8,6 @@ function cerrar() {
 $.lugar_info.addEventListener('open', function(e) {
     var abx = require('com.alcoapps.actionbarextras');
 
-    abx.title = 'Mi Peluquería';
     abx.titleFont = 'SourceSansPro-Black.ttf';
     abx.titleColor = '#FFCEAF';
 

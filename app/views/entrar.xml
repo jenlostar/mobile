@@ -1,0 +1,13 @@
+<Alloy>
+	<Window id="ventanaEntrar">
+        <ScrollView id="scrollview">
+            <View id="contenedor">
+                <TextField id="email" />
+                <TextField id="clave" />
+                <Label id="recuperarContrasena" />
+                <Button id="entrar" />
+                <Label id="registrarse" />
+            </View>
+        </ScrollView>
+	</Window>
+</Alloy>

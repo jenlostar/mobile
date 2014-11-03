@@ -1,4 +1,38 @@
 '#ventanaServicios' : {
     backgroundColor: '#FFF7F2',
     layout: 'vertical'
+},
+
+'#tipoServicio': {
+    font: {
+        fontFamily: 'SourceSansPro-Semibold',
+        fontSize: '20sp'
+    }
+},
+
+'#nombre': {
+    top: '5dip',
+    left: '5dip',
+    font: {
+        fontFamily: 'SourceSansPro-Semibold',
+        fontSize: '20sp'
+    }
+},
+
+'#valor': {
+    right: '5dip',
+    top: '5dip',
+    font: {
+        fontFamily: 'SourceSansPro-Light',
+        fontSize: '20sp'
+    }
+},
+
+'#tiempoEstimado': {
+    left: '5dip',
+    bottom: '5dip',
+    font: {
+        fontFamily: 'SourceSansPro-Light',
+        fontSize: '18sp'
+    }
 }

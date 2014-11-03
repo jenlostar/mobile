@@ -1,0 +1,79 @@
+
+'#ventanaEntrar' : {
+    width: Ti.UI.FILL,
+    height: Ti.UI.FILL,
+    backgroundColor: '#FFF7F2'
+},
+
+'#scrollview': {
+    width: Ti.UI.FILL,
+    height: Ti.UI.FILL,
+    backgroundColor: '#FFF7F2'
+},
+
+'#contenedor': {
+    width: '90%',
+    height: Ti.UI.SIZE,
+    layout: 'vertical',
+    backgroundColor: '#FFF7F2'
+},
+
+'#email': {
+    autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
+    keyboardType: Ti.UI.KEYBOARD_EMAIL,
+    width: '100%',
+    hintText: 'Correo electrónico',
+    font: {
+        fontFamily: 'SourceSansPro-Light',
+        fontSize: '22sp'
+    }
+},
+
+'#clave': {
+    passwordMask: true,
+    returnKeyType: Ti.UI.RETURNKEY_DONE,
+    top: '15dip',
+    width: '100%',
+    hintText: 'Clave',
+    font: {
+        fontFamily: 'SourceSansPro-Light',
+        fontSize: '22sp'
+    }
+},
+
+'#recuperarContrasena': {
+    text: 'Olvidó su contraseña?',
+    width: Ti.UI.FILL,
+    height: '48dip',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    font: {
+        fontFamily: 'SourceSansPro-Regular',
+        fontSize: '18sp'
+    }
+},
+
+'#entrar': {
+    top: '15dip',
+    title: 'Entrar',
+    backgroundColor: '#FF6600',
+    color: '#FFF7F2',
+    width: '100%',
+    font: {
+        fontFamily: 'SourceSansPro-Regular',
+        fontSize: '20sp'
+    }
+},
+
+'#registrarse': {
+    top: '15dip',
+    text: 'Registrar una cuenta',
+    color: '#FFF7F2',
+    width: Ti.UI.FILL,
+    height: '48dip',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    backgroundColor: '#FFBB33',
+    font: {
+        fontFamily: 'SourceSansPro-Regular',
+        fontSize: '20sp'
+    }
+}
