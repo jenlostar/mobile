@@ -1,4 +1,3 @@
-
 '#ventanaEntrar' : {
     width: Ti.UI.FILL,
     height: Ti.UI.FILL,
@@ -52,7 +51,7 @@
     }
 },
 
-'#entrar': {
+'#enviar': {
     top: '15dip',
     title: 'Entrar',
     backgroundColor: '#FF6600',

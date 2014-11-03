@@ -1,0 +1,9 @@
+<resources>
+    <string name="password">Clave</string>
+    <string name="password_confirmation">Confirmar clave</string>
+    <string name="first_name">Nombres</string>
+    <string name="last_name">Apellidos</string>
+    <string name="phone_number">Teléfono</string>
+    <string name="gender">Género</string>
+    <string name="email">Correo electrónico</string>
+</resources>

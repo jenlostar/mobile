@@ -23,10 +23,15 @@ $.ventanaEntrar.addEventListener('open', function(e) {
     }
 });
 
-require('ui').touchFeedbackButton($.entrar, $.registrarse);
+require('ui').touchFeedbackButton($.enviar, $.registrarse);
 require('ui').touchFeedbackButton($.recuperarContrasena);
 
-$.entrar.addEventListener('click', function() {
+$.registrarse.addEventListener('click', function() {
+    Alloy.createController('registrar');
+    $.ventanaEntrar.close();
+});
+
+$.enviar.addEventListener('click', function() {
     Alloy.Globals.LO.show('Enviando...');
 
     var data = {

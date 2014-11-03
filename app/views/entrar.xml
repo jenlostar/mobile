@@ -5,7 +5,7 @@
                 <TextField id="email" />
                 <TextField id="clave" />
                 <Label id="recuperarContrasena" />
-                <Button id="entrar" />
+                <Button id="enviar" />
                 <Label id="registrarse" />
             </View>
         </ScrollView>

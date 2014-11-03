@@ -1,0 +1,105 @@
+'#ventanaRegistrar' : {
+    width: Ti.UI.FILL,
+    height: Ti.UI.FILL,
+    backgroundColor: '#FFF7F2'
+},
+
+'#scrollview': {
+    width: Ti.UI.FILL,
+    height: Ti.UI.FILL,
+    backgroundColor: '#FFF7F2'
+},
+
+'#contenedor': {
+    width: '90%',
+    height: Ti.UI.SIZE,
+    layout: 'vertical',
+    backgroundColor: '#FFF7F2'
+},
+
+'#email': {
+    autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
+    keyboardType: Ti.UI.KEYBOARD_EMAIL,
+    width: '100%',
+    hintText: 'Correo electrónico',
+    font: {
+        fontFamily: 'SourceSansPro-Light',
+        fontSize: '22sp'
+    }
+},
+
+'#clave': {
+    passwordMask: true,
+    top: '10dip',
+    width: '100%',
+    hintText: 'Clave',
+    font: {
+        fontFamily: 'SourceSansPro-Light',
+        fontSize: '22sp'
+    }
+},
+
+'#confirmarClave': {
+    passwordMask: true,
+    top: '10dip',
+    width: '100%',
+    hintText: 'Confirmar clave',
+    font: {
+        fontFamily: 'SourceSansPro-Light',
+        fontSize: '22sp'
+    }
+},
+
+'#nombres': {
+    top: '30dip',
+    autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_WORDS,
+    width: '100%',
+    hintText: 'Nombres',
+    font: {
+        fontFamily: 'SourceSansPro-Light',
+        fontSize: '22sp'
+    }
+},
+
+'#apellidos': {
+    top: '10dip',
+    autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_WORDS,
+    width: '100%',
+    hintText: 'Apellidos',
+    font: {
+        fontFamily: 'SourceSansPro-Light',
+        fontSize: '22sp'
+    }
+},
+
+'#telefono': {
+    top: '10dip',
+    keyboardType: Titanium.UI.KEYBOARD_PHONE_PAD,
+    width: '100%',
+    hintText: 'Teléfono',
+    font: {
+        fontFamily: 'SourceSansPro-Light',
+        fontSize: '22sp'
+    }
+},
+
+'#genero': {
+    top: '10dip',
+    width: '100%',
+    font: {
+        fontFamily: 'SourceSansPro-Light',
+        fontSize: '22sp'
+    }
+},
+
+'#enviar': {
+    top: '10dip',
+    title: 'Enviar',
+    backgroundColor: '#FF6600',
+    color: '#FFF7F2',
+    width: '100%',
+    font: {
+        fontFamily: 'SourceSansPro-Regular',
+        fontSize: '20sp'
+    }
+}

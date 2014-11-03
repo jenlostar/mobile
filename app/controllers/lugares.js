@@ -90,8 +90,15 @@ $.lugares.activity.onCreateOptionsMenu = function(e) {
         showAsAction: Ti.Android.SHOW_AS_ACTION_IF_ROOM
     });
 
-    e.menu.add({title: 'Actualizar'}).addEventListener('click', function(e) {
-        cargarDatos();
+    // e.menu.add({title: 'Actualizar'}).addEventListener('click', function(e) {
+    //     cargarDatos();
+    // });
+
+    e.menu.add({title: 'Mis reservas'}).addEventListener('click', function(e) {
+    });
+
+    e.menu.add({title: 'Mi Perfil'}).addEventListener('click', function(e) {
+
     });
 
     e.menu.add({title: 'Salir'}).addEventListener('click', function(e) {

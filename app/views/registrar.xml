@@ -1,0 +1,22 @@
+<Alloy>
+    <Window id="ventanaRegistrar">
+        <ScrollView id="scrollview">
+            <View id="contenedor">
+                <TextField id="email" />
+                <TextField id="clave" />
+                <TextField id="confirmarClave" />
+                <TextField id="nombres" />
+                <TextField id="apellidos" />
+                <TextField id="telefono" />
+                <Picker id="genero">
+                    <PickerColumn id="columna">
+                        <PickerRow title="Género"/>
+                        <PickerRow title="Femenino"/>
+                        <PickerRow title="Masculino"/>
+                    </PickerColumn>
+                </Picker>
+                <Button id="enviar" />
+            </View>
+        </ScrollView>
+    </Window>
+</Alloy>
