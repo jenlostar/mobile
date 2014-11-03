@@ -1,4 +1,5 @@
 var parametros = arguments[0] || {},
+    crouton = require('de.manumaticx.crouton'),
     buscar = Ti.UI.Android.createSearchView({
         hintText : 'Buscar'
     });
@@ -38,24 +39,47 @@ function procesarError() {
 
 
 function cargarDatos() {
-    $.indicadorActividad.show();
+    Alloy.Globals.LO.show('Cargando...');
     var xhr = Ti.Network.createHTTPClient({
         onload: function(e) {
             var json = JSON.parse(this.responseText);
             procesarRespuesta(json);
             json = null;
-            $.indicadorActividad.hide();
-            $.toast.hide();
+            Alloy.Globals.LO.hide();
         },
         onerror: function(e) {
-            Ti.API.debug(e.error);
-            alert('error');
-            $.indicadorActividad.hide();
+            crouton.alert('Algo salió mal, intenta nuevamente');
+            Alloy.Globals.LO.hide();
         },
         timeout: 15000
     });
 
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+    xhr.setRequestHeader('Authorization', 'Bearer ' + Ti.App.Properties.getString('access_token'));
     xhr.open('GET', Alloy.CFG.API_URL + '/places');
+    xhr.send();
+}
+
+function salir() {
+    Alloy.Globals.LO.show('Cerrando sesión...');
+
+    var xhr = Ti.Network.createHTTPClient({
+        onload: function(e) {
+            Ti.App.Properties.setBool('registrado', false);
+            Ti.App.Properties.setString('access_token', null);
+            Alloy.createController('entrar', {salir: true});
+            $.lugares.close();
+        },
+        onerror: function(e) {
+            crouton.alert('Algo salió mal, intenta nuevamente');
+            Alloy.Globals.LO.hide();
+        },
+        timeout: 15000
+    });
+
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+    xhr.setRequestHeader('Authorization', 'Bearer ' + Ti.App.Properties.getString('access_token'));
+    xhr.open('POST', Alloy.CFG.API_URL + '/logout');
     xhr.send();
 }
 
@@ -70,6 +94,10 @@ $.lugares.activity.onCreateOptionsMenu = function(e) {
     e.menu.add({title: 'Actualizar'}).addEventListener('click', function(e) {
         cargarDatos();
     });
+
+    e.menu.add({title: 'Salir'}).addEventListener('click', function(e) {
+        salir();
+    });
 };
 
 buscar.addEventListener('change', function() {
@@ -83,6 +111,10 @@ $.lugares.addEventListener('open', function(e) {
     abx.titleColor = '#FFCEAF';
 
     $.lugares.activity.invalidateOptionsMenu();
+
+    if (parametros.entrar && parametros.entrar === true) {
+        crouton.confirm('Bievenido/a');
+    }
 });
 
 $.lista.addEventListener('itemclick', function(e) {
@@ -92,6 +124,4 @@ $.lista.addEventListener('itemclick', function(e) {
 });
 
 $.lugares.open();
-$.toast.show();
-
 cargarDatos();

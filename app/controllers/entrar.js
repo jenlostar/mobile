@@ -1,10 +1,9 @@
-var args = arguments[0] || {},
+var parametros = arguments[0] || {},
     crouton = require('de.manumaticx.crouton');
 
 function procesarRespuesta(data) {
     Ti.App.Properties.setBool('registrado', true);
     Ti.App.Properties.setString('access_token', data.access_token);
-    $.ventanaEntrar.close();
 }
 
 $.ventanaEntrar.addEventListener('open', function(e) {
@@ -18,6 +17,10 @@ $.ventanaEntrar.addEventListener('open', function(e) {
     abx.subtitleColor = '#FFCEAF';
 
     $.ventanaEntrar.activity.invalidateOptionsMenu();
+
+    if (parametros.salir && parametros.salir === true) {
+        crouton.info('La sesión ha finalizado');
+    }
 });
 
 require('ui').touchFeedbackButton($.entrar, $.registrarse);
@@ -37,7 +40,8 @@ $.entrar.addEventListener('click', function() {
             procesarRespuesta(json);
             json = null;
             Alloy.Globals.LO.hide();
-            crouton.confirm('Bievenido/a');
+            Alloy.createController('lugares', {entrar: true});
+            $.ventanaEntrar.close();
         },
         onerror: function(e) {
             crouton.alert('Algo salió mal, intenta nuevamente');

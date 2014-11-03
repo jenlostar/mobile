@@ -14,7 +14,5 @@
             </Templates>
             <ListSection id="seccion" />
         </ListView>
-        <ActivityIndicator id="indicadorActividad"/>
-        <Notification id="toast" message="Cargando..." duration="Ti.UI.NOTIFICATION_DURATION_SHORT" />
     </Window>
 </Alloy>
