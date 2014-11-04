@@ -19,6 +19,7 @@ function crearElementoListaServicio(servicio) {
     var moment = require('alloy/moment');
 
     return {
+        servicio: servicio,
         nombre: {text: servicio.name},
         valor: {text: servicio.min_amount+' - '+ servicio.max_amount},
         tiempoEstimado: {text: servicio.duration},
@@ -50,10 +51,10 @@ $.controlLista.addEventListener('itemclick', function(e) {
         item.itemChecked = !item.itemChecked;
         item.itemCheck.visible = item.itemChecked;
 
-        if (item.clicked === true) {
-            item.clicked = false;
+        if (item.itemChecked) {
+            Alloy.Globals.servicios_seleccionados[item.servicio.id] = item.servicio;
         } else {
-            item.clicked = true;
+            delete Alloy.Globals.servicios_seleccionados[item.servicio.id];
         }
 
         e.section.updateItemAt(e.itemIndex, item);

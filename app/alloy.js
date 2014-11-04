@@ -10,6 +10,7 @@
 //
 // Alloy.Globals.someGlobalFunction = function(){};
 Alloy.Globals.lugar = null;
+Alloy.Globals.servicios_seleccionados = {};
 
 Alloy.Globals.LO = Alloy.createWidget('com.caffeinalab.titanium.loader', {
     cancelable: true,

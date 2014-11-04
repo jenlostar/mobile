@@ -10,6 +10,7 @@ function atras() {
 function procesarRespuesta(data) {
     Ti.App.Properties.setBool('registrado', true);
     Ti.App.Properties.setString('access_token', data.access_token);
+    Ti.App.Properties.setObject('user', data);
 }
 
 $.ventanaRegistrar.addEventListener('android:back', atras);

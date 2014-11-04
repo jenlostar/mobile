@@ -4,6 +4,7 @@ var parametros = arguments[0] || {},
 function procesarRespuesta(data) {
     Ti.App.Properties.setBool('registrado', true);
     Ti.App.Properties.setString('access_token', data.access_token);
+    Ti.App.Properties.setObject('user', data);
 }
 
 $.ventanaEntrar.addEventListener('open', function(e) {
