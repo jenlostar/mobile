@@ -20,8 +20,9 @@ function crearElementoListaServicio(servicio) {
 
     return {
         nombre: {text: servicio.name},
-        valor: {text: 'V. '+servicio.min_amount+' y '+ servicio.max_amount},
-        tiempoEstimado: {text: 'T. '+servicio.duration},
+        valor: {text: servicio.min_amount+' - '+ servicio.max_amount},
+        tiempoEstimado: {text: servicio.duration},
+        itemCheck: {text: Alloy.Globals.icons['fa-check'], visible: false},
         properties: {
             width: Ti.UI.FILL,
             height: '60dip',
@@ -41,5 +42,22 @@ function cargarLista() {
     });
     $.seccionLista.setItems(lista);
 }
+
+$.controlLista.addEventListener('itemclick', function(e) {
+    var item = e.section.getItemAt(e.itemIndex);
+
+    if (item.itemCheck) {
+        item.itemChecked = !item.itemChecked;
+        item.itemCheck.visible = item.itemChecked;
+
+        if (item.clicked === true) {
+            item.clicked = false;
+        } else {
+            item.clicked = true;
+        }
+
+        e.section.updateItemAt(e.itemIndex, item);
+    }
+});
 
 cargarLista();

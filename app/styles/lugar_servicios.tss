@@ -6,7 +6,7 @@
 '#tipoServicio': {
     font: {
         fontFamily: 'SourceSansPro-Semibold',
-        fontSize: '20sp'
+        fontSize: '24sp'
     }
 },
 
@@ -15,16 +15,16 @@
     left: '5dip',
     font: {
         fontFamily: 'SourceSansPro-Semibold',
-        fontSize: '20sp'
+        fontSize: '22sp'
     }
 },
 
 '#valor': {
-    right: '5dip',
-    top: '5dip',
+    right: '50dip',
+    bottom: '5dip',
     font: {
         fontFamily: 'SourceSansPro-Light',
-        fontSize: '20sp'
+        fontSize: '21sp'
     }
 },
 
@@ -33,6 +33,33 @@
     bottom: '5dip',
     font: {
         fontFamily: 'SourceSansPro-Light',
-        fontSize: '18sp'
+        fontSize: '21sp'
     }
-}
+},
+
+'#checkbox': {
+    right: '0dip',
+    width: '40dip',
+    height: '40dip',
+    layout: 'composite'
+},
+
+'#checkBorder': {
+    width: '28dip',
+    height: '28dip',
+    borderColor: '#FFBB33',
+    borderRadius: '2',
+    opacity: '0.7',
+    borderWidth: '1dip'
+},
+
+'#itemCheck': {
+    width: '40dip',
+    height: '40dip',
+    color: '#FFBB33',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    font: {
+        fontFamily: 'FontAwesome',
+        fontSize: '28sp'
+    }
+},

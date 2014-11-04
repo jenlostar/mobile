@@ -15,3 +15,5 @@ Alloy.Globals.LO = Alloy.createWidget('com.caffeinalab.titanium.loader', {
     cancelable: true,
     useImages: false
 });
+
+Alloy.Globals.icons = require('icons').charMap;

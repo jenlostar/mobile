@@ -9,6 +9,10 @@
                     <Label id="nombre" bindId="nombre"/>
                     <Label id="valor" bindId="valor"/>
                     <Label id="tiempoEstimado" bindId="tiempoEstimado"/>
+                    <View id="checkbox" bindId="checkbox">
+                        <View id="checkBorder"/>
+                        <Label id="itemCheck" bindId="itemCheck"/>
+                    </View>
                 </ItemTemplate>
             </Templates>
             <ListSection id="seccionLista" />
