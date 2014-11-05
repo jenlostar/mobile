@@ -1,0 +1,72 @@
+'#tituloFecha': {
+    top: '10dip',
+    text: 'Fecha:',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+    font: {
+        fontFamily: 'SourceSansPro-Bold',
+        fontSize: '18sp'
+    }
+},
+
+'#fechaReserva': {
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+    font: {
+        fontFamily: 'SourceSansPro-Regular',
+        fontSize: '18sp'
+    }
+},
+
+'#tituloServicios': {
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+    text: 'Servicios:',
+    font: {
+        fontFamily: 'SourceSansPro-Bold',
+        fontSize: '18sp'
+    }
+},
+
+'#nombre': {
+    top: '10dip',
+    left: '5dip',
+    font: {
+        fontFamily: 'SourceSansPro-Semibold',
+        fontSize: '18sp'
+    }
+},
+
+'#valor': {
+    right: '10dip',
+    bottom: '5dip',
+    font: {
+        fontFamily: 'SourceSansPro-Light',
+        fontSize: '18sp'
+    }
+},
+
+'#tiempoEstimado': {
+    left: '5dip',
+    bottom: '5dip',
+    font: {
+        fontFamily: 'SourceSansPro-Light',
+        fontSize: '18sp'
+    }
+},
+
+'#tituloDuracionTotal': {
+    text: 'Duración total:',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+
+    font: {
+        fontFamily: 'SourceSansPro-Bold',
+        fontSize: '18sp'
+    }
+},
+
+'#duracionTotal': {
+    bottom: '10dip',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+    font: {
+        fontFamily: 'SourceSansPro-Regular',
+        fontSize: '18sp'
+    }
+}

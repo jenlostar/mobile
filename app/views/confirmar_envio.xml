@@ -1,0 +1,25 @@
+<Alloy>
+	<OptionDialog id="dialog" title="Continuar con la reserva?">
+        <AndroidView layout="vertical">
+            <Label id="tituloFecha" />
+            <Label id="fechaReserva" />
+            <Label id="tituloServicios" />
+            <ListView id="controlLista" defaultItemTemplate="default">
+                <Templates>
+                    <ItemTemplate name="default">
+                        <Label id="nombre" bindId="nombre"/>
+                        <Label id="valor" bindId="valor"/>
+                        <Label id="tiempoEstimado" bindId="tiempoEstimado"/>
+                    </ItemTemplate>
+                </Templates>
+                <ListSection id="seccionLista" />
+            </ListView>
+            <Label id="tituloDuracionTotal" />
+            <Label id="duracionTotal" />
+        </AndroidView>
+        <ButtonNames>
+            <ButtonName>Continuar</ButtonName>
+            <ButtonName>Cancelar</ButtonName>
+        </ButtonNames>
+    </OptionDialog>
+</Alloy>

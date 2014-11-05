@@ -16,8 +16,6 @@ function crearElementoListaTipoServicio(nombre) {
 }
 
 function crearElementoListaServicio(servicio) {
-    var moment = require('alloy/moment');
-
     return {
         servicio: servicio,
         nombre: {text: servicio.name},

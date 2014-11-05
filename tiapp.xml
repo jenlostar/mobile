@@ -13,7 +13,7 @@
     <analytics>false</analytics>
     <guid>eafad796-1467-4d03-bb03-7253654b5726</guid>
     <property name="ti.ui.defaultunit" type="string">dp</property>
-    <property name="ti.android.debug" type="bool">true</property>
+    <property name="ti.android.debug" type="bool">false</property>
     <ios />
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <manifest>

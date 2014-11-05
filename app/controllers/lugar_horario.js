@@ -21,6 +21,7 @@ function cargarLista() {
     while (horaInicial.diff(horaFinal) <= 0) {
         horasDia.push({
             fecha: horaInicial.format('YYYY-MM-DD HH:mm'),
+            fechaCompleta: horaInicial.format('dddd DD YYYY hh:mm A'),
             hora: {text: horaInicial.format('hh:mm A')},
             estado: {text: 'Disponible'},
             properties: {
@@ -114,8 +115,10 @@ $.controlLista.addEventListener('itemclick', function(e) {
         return;
     }
 
-    Alloy.Globals.LO.show('Enviando...');
+    // Alloy.Globals.LO.show('Enviando...');
 
-    var servicios_id = _.keys(Alloy.Globals.servicios_seleccionados);
-    enviarReserva(servicios_id, item.fecha);
+    // var servicios_id = _.keys(Alloy.Globals.servicios_seleccionados);
+    // enviarReserva(servicios_id, item.fecha);
+
+    Alloy.createController('confirmar_envio', item);
 });
