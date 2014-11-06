@@ -1,5 +1,5 @@
 <Alloy>
-	<OptionDialog id="dialog" title="Continuar con la reserva?">
+	<OptionDialog id="dialogo" title="Continuar con la reserva?">
         <AndroidView layout="vertical">
             <Label id="tituloFecha" />
             <Label id="fechaReserva" />

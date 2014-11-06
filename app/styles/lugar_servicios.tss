@@ -20,11 +20,11 @@
 },
 
 '#valor': {
-    right: '50dip',
+    right: '40dip',
     bottom: '5dip',
     font: {
         fontFamily: 'SourceSansPro-Light',
-        fontSize: '21sp'
+        fontSize: '20sp'
     }
 },
 
@@ -33,14 +33,14 @@
     bottom: '5dip',
     font: {
         fontFamily: 'SourceSansPro-Light',
-        fontSize: '21sp'
+        fontSize: '18sp'
     }
 },
 
 '#checkbox': {
     right: '0dip',
-    width: '40dip',
-    height: '40dip',
+    width: '35dip',
+    height: '35dip',
     layout: 'composite'
 },
 
@@ -54,12 +54,12 @@
 },
 
 '#itemCheck': {
-    width: '40dip',
-    height: '40dip',
+    width: '35dip',
+    height: '35dip',
     color: '#FFBB33',
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     font: {
         fontFamily: 'FontAwesome',
-        fontSize: '28sp'
+        fontSize: '24dip'
     }
 }

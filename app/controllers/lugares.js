@@ -13,7 +13,7 @@ function crearElementoLista(item) {
         descripcion: {text: item.description},
         properties: {
             width: Ti.UI.FILL,
-            height: '96dip',
+            height: Ti.UI.SIZE,
             backgroundColor: 'transparent',
             selectedBackgroundColor: '#FF6600',
             searchableText: item.name +' '+ item.description,

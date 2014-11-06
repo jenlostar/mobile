@@ -41,4 +41,8 @@ $.fechaReserva.text = opciones.fechaCompleta;
 
 cargarLista();
 
-$.dialog.show();
+$.dialogo.addEventListener('click', function(e) {
+    Ti.API.info(e.cancel);
+});
+
+$.dialogo.show();
