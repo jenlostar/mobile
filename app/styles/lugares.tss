@@ -3,21 +3,6 @@
     backgroundColor: '#FFF7F2'
 },
 
-'#actionbar': {
-    //icon: '/actionicon.png',
-    //displayHomeAsUp: true,
-    //backgroundImage: '/actionbackground.png'
-    title: 'Mi Peluquería',
-    // subtitle: 'Lugares disponibles'
-},
-
-'#preferences': {
-    icon: Ti.Android.R.drawable.ic_menu_preferences,
-    //showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS,
-    title: 'Preferencias'
-},
-
-
 '#lista': {
     backgroundColor: '#FFF7F2'
 },

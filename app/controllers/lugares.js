@@ -5,8 +5,6 @@ var parametros = arguments[0] || {},
     });
 
 function crearElementoLista(item) {
-    var pic = 'http://placeimg.com/100/100/people/.jpg?_='+item.id;
-
     return {
         data: item,
         nombre: {text: item.name},
@@ -90,18 +88,19 @@ $.lugares.activity.onCreateOptionsMenu = function(e) {
         showAsAction: Ti.Android.SHOW_AS_ACTION_IF_ROOM
     });
 
-    // e.menu.add({title: 'Actualizar'}).addEventListener('click', function(e) {
-    //     cargarDatos();
-    // });
-
-    e.menu.add({title: 'Mis reservas'}).addEventListener('click', function(e) {
+    e.menu.add({title: 'Actualizar'}).addEventListener('click', function(e) {
+        cargarDatos();
     });
 
-    e.menu.add({title: 'Mi Perfil'}).addEventListener('click', function(e) {
-
+    e.menu.add({title: 'Mis reservas'}).addEventListener('click', function() {
+        Alloy.createController('reservas');
     });
 
-    e.menu.add({title: 'Salir'}).addEventListener('click', function(e) {
+    e.menu.add({title: 'Mi Perfil'}).addEventListener('click', function() {
+        Alloy.createController('usuario');
+    });
+
+    e.menu.add({title: 'Salir'}).addEventListener('click', function() {
         salir();
     });
 };
@@ -110,7 +109,7 @@ buscar.addEventListener('change', function() {
     $.lista.setSearchText(buscar.value);
 });
 
-$.lugares.addEventListener('open', function(e) {
+$.lugares.addEventListener('open', function() {
     var abx = require('com.alcoapps.actionbarextras');
 
     abx.titleFont = 'SourceSansPro-Black.ttf';

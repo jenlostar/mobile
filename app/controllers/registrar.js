@@ -1,6 +1,4 @@
-var args = arguments[0] || {},
-    crouton = require('de.manumaticx.crouton'),
-    genero = 'F';
+var crouton = require('de.manumaticx.crouton');
 
 function atras() {
     Alloy.createController('entrar');
@@ -17,7 +15,7 @@ $.ventanaRegistrar.addEventListener('android:back', atras);
 
 require('ui').touchFeedbackButton($.enviar);
 
-$.ventanaRegistrar.addEventListener('open', function(e) {
+$.ventanaRegistrar.addEventListener('open', function() {
     var abx = require('com.alcoapps.actionbarextras');
 
     abx.titleFont = 'SourceSansPro-Black.ttf';
@@ -30,10 +28,6 @@ $.ventanaRegistrar.addEventListener('open', function(e) {
     $.ventanaRegistrar.activity.actionBar.displayHomeAsUp = true;
     $.ventanaRegistrar.activity.actionBar.onHomeIconItemSelected = atras;
     $.ventanaRegistrar.activity.invalidateOptionsMenu();
-});
-
-$.genero.addEventListener('change', function(e) {
-
 });
 
 $.enviar.addEventListener('click', function() {
@@ -51,7 +45,7 @@ $.enviar.addEventListener('click', function() {
     };
 
     var xhr = Ti.Network.createHTTPClient({
-        onload: function(e) {
+        onload: function() {
             var json = JSON.parse(this.responseText);
             procesarRespuesta(json);
             json = null;
@@ -59,7 +53,7 @@ $.enviar.addEventListener('click', function() {
             Alloy.createController('lugares', {entrar: true});
             $.ventanaEntrar.close();
         },
-        onerror: function(e) {
+        onerror: function() {
             var response = JSON.parse(this.responseText);
 
             Ti.API.info(JSON.stringify(response));
@@ -82,7 +76,5 @@ $.enviar.addEventListener('click', function() {
     xhr.open('POST', Alloy.CFG.API_URL + '/signup');
     xhr.send(JSON.stringify(data));
 });
-
-
 
 $.ventanaRegistrar.open();
