@@ -1,27 +1,25 @@
 <Alloy>
     <Window id="ventanaConfirmar">
-        <ScrollView id="scrollview">
-            <View id="cabecera">
-                <View id="cuando">
-                    <Label id="tituloFecha"/>
-                    <Label id="fechaReserva" />
-                </View>
-                <View id="duracion">
-                    <Label id="tituloDuracionTotal"/>
-                    <Label id="duracionTotal" />
-                </View>
+        <ListView id="controlLista" defaultItemTemplate="default">
+            <Templates>
+                <ItemTemplate name="default">
+                    <Label id="nombre" bindId="nombre"/>
+                    <Label id="valor" bindId="valor"/>
+                    <Label id="tiempoEstimado" bindId="tiempoEstimado"/>
+                </ItemTemplate>
+            </Templates>
+            <ListSection id="seccionLista" />
+        </ListView>
+        <View id="cabecera">
+            <View id="cuando">
+                <Label id="tituloFecha"/>
+                <Label id="fechaReserva" />
             </View>
-            <Label id="tituloServicios" />
-            <ListView id="controlLista" defaultItemTemplate="default">
-                <Templates>
-                    <ItemTemplate name="default">
-                        <Label id="nombre" bindId="nombre"/>
-                        <Label id="valor" bindId="valor"/>
-                        <Label id="tiempoEstimado" bindId="tiempoEstimado"/>
-                    </ItemTemplate>
-                </Templates>
-                <ListSection id="seccionLista" />
-            </ListView>
-        </ScrollView>
+            <View id="duracion">
+                <Label id="tituloDuracionTotal"/>
+                <Label id="duracionTotal" />
+            </View>
+        </View>
+        <Button id="enviar" />
     </Window>
 </Alloy>

@@ -1,21 +1,15 @@
 '#ventanaConfirmar' : {
     width: Ti.UI.FILL,
     height: Ti.UI.FILL,
-    backgroundColor: '#FFF7F2'
-},
-
-'#scrollview': {
-    width: Ti.UI.FILL,
-    height: Ti.UI.FILL,
     backgroundColor: '#FFF7F2',
-    layout: 'vertical'
+    layout: 'composite'
 },
 
 '#cabecera': {
-    bottom: '0dip',
+    top: '0dip',
     width: Ti.UI.FILL,
     height: '96dip',
-    backgroundColor: '#FF6600',
+    backgroundColor: '#F0FF6600',
     layout: 'vertical'
 },
 
@@ -79,17 +73,9 @@
     }
 },
 
-'#tituloServicios': {
-    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-    text: 'Servicios seleccionados:',
-    font: {
-        fontFamily: 'SourceSansPro-Bold',
-        fontSize: '22sp'
-    }
-},
-
 '#controlLista': {
-    height: Ti.UI.SIZE
+    height: Ti.UI.SIZE,
+    top: '0dip'
 }
 
 '#nombre': {
@@ -116,5 +102,17 @@
     font: {
         fontFamily: 'SourceSansPro-Light',
         fontSize: '18sp'
+    }
+},
+
+'#enviar': {
+    bottom: '5dip',
+    title: 'Enviar',
+    backgroundColor: '#F0FF6600',
+    color: '#FFF7F2',
+    width: '90%',
+    font: {
+        fontFamily: 'SourceSansPro-Regular',
+        fontSize: '20sp'
     }
 }

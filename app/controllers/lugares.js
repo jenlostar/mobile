@@ -84,11 +84,11 @@ $.lugares.activity.onCreateOptionsMenu = function(e) {
     e.menu.add({
         title: 'Buscar lugar',
         icon: Ti.Android.R.drawable.ic_menu_search,
-        actionView : buscar,
+        actionView: buscar,
         showAsAction: Ti.Android.SHOW_AS_ACTION_IF_ROOM
     });
 
-    e.menu.add({title: 'Actualizar'}).addEventListener('click', function(e) {
+    e.menu.add({title: 'Actualizar'}).addEventListener('click', function() {
         cargarDatos();
     });
 

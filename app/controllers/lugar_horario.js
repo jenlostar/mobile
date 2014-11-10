@@ -37,34 +37,6 @@ function cargarLista() {
     $.seccionLista.setItems(horasDia);
 }
 
-function enviarReserva(servicios, horaSeleccionada) {
-
-    var xhr = Ti.Network.createHTTPClient({
-        onload: function(e) {
-            Alloy.Globals.LO.hide();
-            crouton.info('Se ha creado una nueva solicitud de reserva, en un momento recibira una confirmación via correo electrónico');
-        },
-        onerror: function(e) {
-            Alloy.Globals.LO.hide();
-            crouton.alert('Algo salió mal, intenta nuevamente');
-        },
-        timeout: 15000
-    });
-
-    xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-    xhr.setRequestHeader('Authorization', 'Bearer ' + Ti.App.Properties.getString('access_token'));
-    xhr.open('POST', Alloy.CFG.API_URL + '/bookings');
-
-    var post = {
-        user_id: Ti.App.Properties.getObject('user').id,
-        place_id: Alloy.Globals.lugar.id,
-        date: horaSeleccionada,
-        services: servicios
-    };
-
-    xhr.send(JSON.stringify(post));
-}
-
 function actualizarInfoNavegacion() {
     var abx = require('com.alcoapps.actionbarextras'),
         fechaActual = new moment(fechaSeleccionada);
@@ -114,10 +86,9 @@ $.controlLista.addEventListener('itemclick', function(e) {
         return;
     }
 
-    // Alloy.Globals.LO.show('Enviando...');
-
-    // var servicios_id = _.keys(Alloy.Globals.servicios_seleccionados);
-    // enviarReserva(servicios_id, item.fecha);
+    item.success = function(respuesta) {
+        cargarLista();
+    }
 
     Alloy.createController('confirmar_envio', item);
 });
