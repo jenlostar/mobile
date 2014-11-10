@@ -1,8 +1,16 @@
 <Alloy>
-	<OptionDialog id="dialogo" title="Continuar con la reserva?">
-        <AndroidView layout="vertical">
-            <Label id="tituloFecha" />
-            <Label id="fechaReserva" />
+    <Window id="ventanaConfirmar">
+        <ScrollView id="scrollview">
+            <View id="cabecera">
+                <View id="cuando">
+                    <Label id="tituloFecha"/>
+                    <Label id="fechaReserva" />
+                </View>
+                <View id="duracion">
+                    <Label id="tituloDuracionTotal"/>
+                    <Label id="duracionTotal" />
+                </View>
+            </View>
             <Label id="tituloServicios" />
             <ListView id="controlLista" defaultItemTemplate="default">
                 <Templates>
@@ -14,12 +22,6 @@
                 </Templates>
                 <ListSection id="seccionLista" />
             </ListView>
-            <Label id="tituloDuracionTotal" />
-            <Label id="duracionTotal" />
-        </AndroidView>
-        <ButtonNames>
-            <ButtonName>Continuar</ButtonName>
-            <ButtonName>Cancelar</ButtonName>
-        </ButtonNames>
-    </OptionDialog>
+        </ScrollView>
+    </Window>
 </Alloy>

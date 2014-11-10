@@ -1,29 +1,96 @@
+'#ventanaConfirmar' : {
+    width: Ti.UI.FILL,
+    height: Ti.UI.FILL,
+    backgroundColor: '#FFF7F2'
+},
+
+'#scrollview': {
+    width: Ti.UI.FILL,
+    height: Ti.UI.FILL,
+    backgroundColor: '#FFF7F2',
+    layout: 'vertical'
+},
+
+'#cabecera': {
+    bottom: '0dip',
+    width: Ti.UI.FILL,
+    height: '96dip',
+    backgroundColor: '#FF6600',
+    layout: 'vertical'
+},
+
+'#cuando': {
+    height: '48dip',
+    left: '10dip',
+    right: '10dip',
+    width: Ti.UI.FILL,
+    layout: 'horizontal'
+},
+
+'#duracion': {
+    height: '48dip',
+    left: '10dip',
+    right: '10dip',
+    width: Ti.UI.FILL,
+    layout: 'horizontal'
+},
+
 '#tituloFecha': {
-    top: '10dip',
-    text: 'Fecha:',
-    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+    height: Ti.UI.FILL,
+    text: Alloy.Globals.icons.fa_calendar,
+    color: '#FFCEAF',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     font: {
-        fontFamily: 'SourceSansPro-Bold',
-        fontSize: '18sp'
+        fontFamily: 'FontAwesome',
+        fontSize: '26sp'
     }
 },
 
 '#fechaReserva': {
-    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+    height: '48dip',
+    color: '#FFCEAF',
+    left: '5dip',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     font: {
         fontFamily: 'SourceSansPro-Regular',
-        fontSize: '18sp'
+        fontSize: '26sp'
+    }
+},
+
+'#tituloDuracionTotal': {
+    height: '48dip',
+    color: '#FFCEAF',
+    text: Alloy.Globals.icons.fa_clock_o,
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    font: {
+        fontFamily: 'FontAwesome',
+        fontSize: '26sp'
+    }
+},
+
+'#duracionTotal': {
+    height: '48dip',
+    color: '#FFCEAF',
+    left: '5dip',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    font: {
+        fontFamily: 'SourceSansPro-Regular',
+        fontSize: '26sp'
     }
 },
 
 '#tituloServicios': {
-    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-    text: 'Servicios:',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    text: 'Servicios seleccionados:',
     font: {
         fontFamily: 'SourceSansPro-Bold',
-        fontSize: '18sp'
+        fontSize: '22sp'
     }
 },
+
+'#controlLista': {
+    height: Ti.UI.SIZE
+}
 
 '#nombre': {
     top: '10dip',
@@ -48,25 +115,6 @@
     bottom: '5dip',
     font: {
         fontFamily: 'SourceSansPro-Light',
-        fontSize: '18sp'
-    }
-},
-
-'#tituloDuracionTotal': {
-    text: 'Duración total:',
-    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-
-    font: {
-        fontFamily: 'SourceSansPro-Bold',
-        fontSize: '18sp'
-    }
-},
-
-'#duracionTotal': {
-    bottom: '10dip',
-    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-    font: {
-        fontFamily: 'SourceSansPro-Regular',
         fontSize: '18sp'
     }
 }

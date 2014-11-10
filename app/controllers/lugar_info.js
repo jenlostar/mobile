@@ -1,7 +1,5 @@
 var lugar = arguments[0] || {};
 
-Ti.API.info('Lugar:', JSON.stringify(lugar));
-
 function cerrar() {
     $.lugar_info.close({animated: false});
     $.lugar_info = null;

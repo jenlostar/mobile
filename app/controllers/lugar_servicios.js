@@ -21,7 +21,7 @@ function crearElementoListaServicio(servicio) {
         nombre: {text: servicio.name},
         valor: {text: servicio.min_amount+' - '+ servicio.max_amount},
         tiempoEstimado: {text: servicio.duration},
-        itemCheck: {text: Alloy.Globals.icons['fa-check'], visible: false},
+        itemCheck: {text: Alloy.Globals.icons.fa_check, visible: false},
         properties: {
             width: Ti.UI.FILL,
             height: '60dip',

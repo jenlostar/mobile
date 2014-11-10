@@ -1,5 +1,4 @@
-var parametros = arguments[0] || {},
-    crouton = require('de.manumaticx.crouton');
+var crouton = require('de.manumaticx.crouton');
 
 var moment = require('alloy/moment');
 require('alloy/moment/lang/es');
@@ -21,7 +20,7 @@ function cargarLista() {
     while (horaInicial.diff(horaFinal) <= 0) {
         horasDia.push({
             fecha: horaInicial.format('YYYY-MM-DD HH:mm'),
-            fechaCompleta: horaInicial.format('dddd DD YYYY hh:mm A'),
+            fechaCompleta: horaInicial.format('ddd DD MMM hh:mm A'),
             hora: {text: horaInicial.format('hh:mm A')},
             estado: {text: 'Disponible'},
             properties: {
