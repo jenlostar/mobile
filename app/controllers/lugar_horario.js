@@ -13,16 +13,44 @@ var fechaMaxima = new Date(anioActual, mesActual, diaActual + 8, 7, 0, 0);
 var fechaSeleccionada = fechaMinima;
 
 function cargarLista() {
-    var horasDia = [],
-        horaInicial = new moment(fechaSeleccionada).startOf('day').add(7, 'hours'),
-        horaFinal = new moment(fechaSeleccionada).startOf('day').add(19, 'hours');
+    var fechaActual = new moment(fechaSeleccionada);
+    Alloy.Globals.LO.show('Actualizando...');
+    var xhr = Ti.Network.createHTTPClient({
+        onload: function(e) {
+            var json = JSON.parse(this.responseText);
+            procesarRespuesta(json);
+            json = null;
+            Alloy.Globals.LO.hide();
+        },
+        onerror: function(e) {
+            crouton.alert('Algo salió mal, intenta nuevamente');
+            Alloy.Globals.LO.hide();
+        },
+        timeout: 15000
+    });
 
-    while (horaInicial.diff(horaFinal) <= 0) {
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+    xhr.setRequestHeader('Authorization', 'Bearer ' + Ti.App.Properties.getString('access_token'));
+    xhr.open('GET', Alloy.CFG.API_URL+'/places/'+Alloy.Globals.lugar.id+'/bookings/'+fechaActual.format('YYYY-MM-DD'));
+    xhr.send();
+}
+
+function procesarRespuesta(respuesta) {
+    var horasDia = [];
+
+    _.each(respuesta, function(hora) {
         horasDia.push({
-            fecha: horaInicial.format('YYYY-MM-DD HH:mm'),
-            fechaCompleta: horaInicial.format('ddd DD MMM hh:mm A'),
-            hora: {text: horaInicial.format('hh:mm A')},
-            estado: {text: 'Disponible'},
+            fecha: hora.date,
+            fechaCompleta: hora.date_extended,
+            hora: {text: hora.hour_with_meridian},
+            estado: {
+                text: hora.available ? 'Disponible' : 'Ocupado',
+                font: {
+                    fontFamily: hora.available ? 'SourceSansPro-Regular' : 'SourceSansPro-Light',
+                    fontSize: '24sp'
+                }
+            },
+            disponible: hora.available,
             properties: {
                 width: Ti.UI.FILL,
                 height: '70dip',
@@ -30,9 +58,7 @@ function cargarLista() {
                 layout: 'horizontal'
             }
         });
-
-        horaInicial.add(60, 'minutes');
-    }
+    });
 
     $.seccionLista.setItems(horasDia);
 }
@@ -80,15 +106,18 @@ $.anterior.addEventListener('click', function() {
 
 $.controlLista.addEventListener('itemclick', function(e) {
     var item = e.section.getItemAt(e.itemIndex);
+    if(item.disponible) {
+        if(_.isEmpty(Alloy.Globals.servicios_seleccionados)) {
+            crouton.alert('Debe seleccionar por lo menos un servicio para continuar con la reserva');
+            return;
+        }
 
-    if(_.isEmpty(Alloy.Globals.servicios_seleccionados)) {
-        crouton.alert('Debe seleccionar por lo menos un servicio para continuar con la reserva');
-        return;
+        item.success = function(respuesta) {
+            cargarLista();
+        };
+
+        Alloy.createController('confirmar_envio', item);
+    } else {
+        crouton.alert('La hora seleccionada no esta disponible');
     }
-
-    item.success = function(respuesta) {
-        cargarLista();
-    }
-
-    Alloy.createController('confirmar_envio', item);
 });
