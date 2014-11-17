@@ -54,6 +54,8 @@ function enviarReserva(servicios, horaSeleccionada) {
                 reserva.success(respuesta);
             }
 
+            Alloy.Globals.servicios_seleccionados = {};
+
             crouton.info('Se ha creado una nueva solicitud de reserva, en un momento recibira una confirmación via correo electrónico');
         },
         onerror: function() {
