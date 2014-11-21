@@ -16,7 +16,12 @@
                 <Label class="font-lg" icon="fa-phone"/>
                 <Label class="campo" id="telefonoLugar" />
             </View>
-
+            <View class="fila" id="calificar">
+                <View id="promedio">
+                    <Label id="promedioIcon"/>
+                    <Label id="promedioValor" />
+                </View>
+            </View>
             <Widget id="fa" src="com.mattmcfarland.fontawesome"/>
         </ScrollView>
     </Window>

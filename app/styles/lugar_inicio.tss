@@ -41,7 +41,7 @@
     top: '5dip',
     font: {
         fontFamily: 'SourceSansPro-Light',
-        fontSize: '19sp'
+        fontSize: '16sp'
     }
 },
 
@@ -58,12 +58,48 @@
     width: '20dip',
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     font: {
-        fontSize:'22sp'
+        fontSize:'28sp'
     }
 },
 
 '.campo': {
     left: '22dip',
+},
+
+'#calificar': {
+    width: Ti.UI.FILL,
+    height: '58dip',
+    layout: 'composite'
+},
+
+'#promedio': {
+    width: '58dip',
+    height: '58dip',
+    right: '10dip',
+    layout: 'composite'
+},
+
+'#promedioIcon': {
+    width: '58dip',
+    height: '58dip',
+    color: '#FF6600',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    text: Alloy.Globals.icons.fa_heart,
+    font: {
+        fontFamily: 'FontAwesome',
+        fontSize: '58dip'
+    }
+},
+
+'#promedioValor':{
+    width: '58dip',
+    height: '58dip',
+    color: '#FFFFFF',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    font: {
+        fontFamily: 'SourceSansPro-Regular',
+        fontSize: '22sp'
+    }
 },
 
 '#direccionLugar':{
@@ -72,7 +108,7 @@
     color: '#555555',
     font: {
         fontFamily: 'SourceSansPro-Light',
-        fontSize: '19sp'
+        fontSize: '23sp'
     }
 },
 
@@ -82,6 +118,17 @@
     color: '#555555',
     font: {
         fontFamily: 'SourceSansPro-Light',
-        fontSize: '19sp'
+        fontSize: '23sp'
+    }
+},
+
+'#itemCheck': {
+    width: '35dip',
+    height: '35dip',
+    color: '#FFBB33',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    font: {
+        fontFamily: 'FontAwesome',
+        fontSize: '24dip'
     }
 }
