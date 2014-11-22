@@ -1,4 +1,6 @@
-var crouton = require('de.manumaticx.crouton');
+var crouton = require('de.manumaticx.crouton'),
+    accessToken = Ti.App.Properties.getString('access_token'),
+    lugar = Alloy.Globals.lugar;
 
 var moment = require('alloy/moment');
 require('alloy/moment/lang/es');
@@ -13,8 +15,12 @@ var fechaMaxima = new Date(anioActual, mesActual, diaActual + 8, 7, 0, 0);
 var fechaSeleccionada = fechaMinima;
 
 function cargarLista() {
-    var fechaActual = new moment(fechaSeleccionada);
+    var fechaActual = new moment(fechaSeleccionada),
+        dia = fechaActual.format('YYYY-MM-DD'),
+        url = Alloy.CFG.API + '/places/' + lugar.id + '/bookings/' + dia;
+
     Alloy.Globals.LO.show('Actualizando...');
+
     var xhr = Ti.Network.createHTTPClient({
         onload: function(e) {
             var json = JSON.parse(this.responseText);
@@ -30,8 +36,8 @@ function cargarLista() {
     });
 
     xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-    xhr.setRequestHeader('Authorization', 'Bearer ' + Ti.App.Properties.getString('access_token'));
-    xhr.open('GET', Alloy.CFG.API_URL+'/places/'+Alloy.Globals.lugar.id+'/bookings/'+fechaActual.format('YYYY-MM-DD'));
+    xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+    xhr.open('GET', url);
     xhr.send();
 }
 

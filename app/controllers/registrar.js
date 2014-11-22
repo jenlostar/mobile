@@ -73,7 +73,7 @@ $.enviar.addEventListener('click', function() {
     });
 
     xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-    xhr.open('POST', Alloy.CFG.API_URL + '/signup');
+    xhr.open('POST', Alloy.CFG.API + '/signup');
     xhr.send(JSON.stringify(data));
 });
 

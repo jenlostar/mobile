@@ -1,5 +1,8 @@
 var reserva = arguments[0] || {},
-    crouton = require('de.manumaticx.crouton');
+    crouton = require('de.manumaticx.crouton'),
+    usuario = Ti.App.Properties.getObject('user'),
+    lugar = Alloy.Globals.lugar,
+    accessToken = Ti.App.Properties.getString('access_token');
 
 
 function atras() {
@@ -66,12 +69,12 @@ function enviarReserva(servicios, horaSeleccionada) {
     });
 
     xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-    xhr.setRequestHeader('Authorization', 'Bearer ' + Ti.App.Properties.getString('access_token'));
-    xhr.open('POST', Alloy.CFG.API_URL + '/bookings');
+    xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+    xhr.open('POST', Alloy.CFG.API + '/bookings');
 
     var datosReserva = {
-        user_id: Ti.App.Properties.getObject('user').id,
-        place_id: Alloy.Globals.lugar.id,
+        user_id: usuario.id,
+        place_id: lugar.id,
         date: horaSeleccionada,
         services: servicios
     };

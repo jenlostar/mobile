@@ -91,7 +91,7 @@ $.enviar.addEventListener('click', function() {
 
     xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
     xhr.setRequestHeader('Authorization', 'Bearer ' + Ti.App.Properties.getString('access_token'));
-    xhr.open('POST', Alloy.CFG.API_URL + '/users/profile');
+    xhr.open('POST', Alloy.CFG.API + '/users/profile');
     xhr.send(JSON.stringify(data));
 });
 

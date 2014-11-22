@@ -1,8 +1,9 @@
 var parametros = arguments[0] || {},
     crouton = require('de.manumaticx.crouton'),
-    barraCalificacion = require('titutorial.ratingbar');
-
-$.promedioValor.text = Alloy.Globals.lugar.rating_avg;
+    barraCalificacion = require('titutorial.ratingbar'),
+    API = require('http_client'),
+    usuario = Ti.App.Properties.getObject('user'),
+    lugar = Alloy.Globals.lugar;
 
 barraCalificacion = barraCalificacion.createRatingBar({
      left: 15,
@@ -12,35 +13,36 @@ barraCalificacion = barraCalificacion.createRatingBar({
      isIndicator: false
 });
 
-function procesarRespuesta(json) {
-    Ti.API.info(JSON.stringify(json))
+function cambiarCalificacion(e) {
+    var data = {user_id: usuario.id, place_id: lugar.id, value: e.rating},
+        url = '/ratings',
+        xhr = API.POST(url, actualizarValores, null, true);
+
+    xhr.send(JSON.stringify(data));
 }
 
-barraCalificacion.addEventListener('change', function(e) {
-    var xhr = Ti.Network.createHTTPClient({
-        onload: function(e) {
-            var json = JSON.parse(this.responseText);
-            procesarRespuesta(json);
-            json = null;
-            Alloy.Globals.LO.hide();
-        },
-        onerror: function(e) {
-            crouton.alert('Algo salió mal, intenta nuevamente');
-            Alloy.Globals.LO.hide();
-        },
-        timeout: 15000
-    });
+function actualizarValores(json) {
+    $.promedioValor.text = json.place.rating_average;
+    barraCalificacion.setRating(json.value);
+}
 
-    var data = {
-        user_id: Ti.App.Properties.getObject('user').id,
-        place_id: Alloy.Globals.lugar.id,
-        value: e.rating
-    };
+function respuestaCalificacionActual(json) {
+    actualizarValores(json);
+    Alloy.Globals.LO.hide();
+    barraCalificacion.addEventListener('change', cambiarCalificacion);
+}
 
-    xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-    xhr.setRequestHeader('Authorization', 'Bearer ' + Ti.App.Properties.getString('access_token'));
-    xhr.open('POST', Alloy.CFG.API_URL + '/ratings');
-    xhr.send(JSON.stringify(data));
-});
+function errorRespuesta() {
+    crouton.alert('Algo salió mal, intenta nuevamente');
+    Alloy.Globals.LO.hide();
+}
+
+function cargarCalificacionActual() {
+    var url = '/ratings/current/' + lugar.id + '/' + usuario.id,
+        xhr = API.GET(url, respuestaCalificacionActual, null, true);
+    xhr.send();
+}
+
+cargarCalificacionActual();
 
 $.calificar.add(barraCalificacion);

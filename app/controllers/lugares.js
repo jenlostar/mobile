@@ -1,4 +1,5 @@
 var parametros = arguments[0] || {},
+    API = require('http_client'),
     crouton = require('de.manumaticx.crouton'),
     buscar = Ti.UI.Android.createSearchView({
         hintText : 'Buscar'
@@ -29,54 +30,38 @@ function procesarRespuesta(respuesta) {
     });
 
     $.seccion.setItems(lugares);
+    Alloy.Globals.LO.hide();
 }
 
 function procesarError() {
+    crouton.alert('Algo salió mal, intenta nuevamente');
+    Alloy.Globals.LO.hide();
 }
-
 
 function cargarDatos() {
     Alloy.Globals.LO.show('Cargando...');
-    var xhr = Ti.Network.createHTTPClient({
-        onload: function(e) {
-            var json = JSON.parse(this.responseText);
-            procesarRespuesta(json);
-            json = null;
-            Alloy.Globals.LO.hide();
-        },
-        onerror: function(e) {
-            crouton.alert('Algo salió mal, intenta nuevamente');
-            Alloy.Globals.LO.hide();
-        },
-        timeout: 15000
-    });
-
-    xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-    xhr.setRequestHeader('Authorization', 'Bearer ' + Ti.App.Properties.getString('access_token'));
-    xhr.open('GET', Alloy.CFG.API_URL + '/places');
+    var xhr = API.GET('/places', procesarRespuesta, procesarError, true);
     xhr.send();
 }
 
 function salir() {
     Alloy.Globals.LO.show('Cerrando sesión...');
 
-    var xhr = Ti.Network.createHTTPClient({
-        onload: function(e) {
+    var xhr = API.POST(
+        '/logout',
+        function() {
             Ti.App.Properties.setBool('registrado', false);
             Ti.App.Properties.setString('access_token', null);
             Alloy.createController('entrar', {salir: true});
             $.lugares.close();
         },
-        onerror: function(e) {
+        function() {
             crouton.alert('Algo salió mal, intenta nuevamente');
             Alloy.Globals.LO.hide();
         },
-        timeout: 15000
-    });
+        true
+    );
 
-    xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-    xhr.setRequestHeader('Authorization', 'Bearer ' + Ti.App.Properties.getString('access_token'));
-    xhr.open('POST', Alloy.CFG.API_URL + '/logout');
     xhr.send();
 }
 
@@ -90,10 +75,6 @@ $.lugares.activity.onCreateOptionsMenu = function(e) {
 
     e.menu.add({title: 'Actualizar'}).addEventListener('click', function() {
         cargarDatos();
-    });
-
-    e.menu.add({title: 'Mis reservas'}).addEventListener('click', function() {
-        Alloy.createController('reservas');
     });
 
     e.menu.add({title: 'Mi Perfil'}).addEventListener('click', function() {

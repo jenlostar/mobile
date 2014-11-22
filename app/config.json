@@ -1,12 +1,12 @@
 {
   "global": {
-    "API_URL": "http://backend-jenlostar.herokuapp.com/api/v1"
+    "API": "http://backend-jenlostar.herokuapp.com/api/v1"
   },
   "env:development": {
-    "API_URL": "http://backend-jenlostar.herokuapp.com/api/v1"
+    "API": "http://backend-jenlostar.herokuapp.com/api/v1"
   },
   "env:test": {
-    "API_URL": "http://backend-jenlostar.herokuapp.com/api/v1"
+    "API": "http://backend-jenlostar.herokuapp.com/api/v1"
   },
   "env:production": {},
   "os:android": {},
