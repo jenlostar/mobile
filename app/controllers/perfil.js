@@ -1,4 +1,5 @@
 var crouton = require('de.manumaticx.crouton'),
+    API = require('http_client'),
     datosUsuario = Ti.App.Properties.getObject('user');
 
 
@@ -21,6 +22,22 @@ function procesarRespuesta(data) {
     Ti.App.Properties.setBool('registrado', true);
     Ti.App.Properties.setString('access_token', data.access_token);
     Ti.App.Properties.setObject('user', data);
+
+    Alloy.Globals.LO.hide();
+    $.ventanaUsuario.close();
+}
+
+function procesarError(json) {
+    if (json.errors) {
+        var atributoError = Object.keys(json.errors)[0];
+        var mensajeError = json.errors[atributoError][0];
+
+        crouton.alert(L(atributoError)+': '+mensajeError);
+    } else {
+        crouton.alert('Algo salió mal, intenta nuevamente');
+    }
+
+    Alloy.Globals.LO.hide();
 }
 
 $.ventanaUsuario.addEventListener('android:back', atras);
@@ -62,36 +79,7 @@ $.enviar.addEventListener('click', function() {
         data.password_confirmation = $.confirmarClave.value;
     }
 
-    var xhr = Ti.Network.createHTTPClient({
-        onload: function() {
-            var json = JSON.parse(this.responseText);
-            procesarRespuesta(json);
-            json = null;
-            Alloy.Globals.LO.hide();
-            $.ventanaUsuario.close();
-        },
-        onerror: function() {
-            var response = JSON.parse(this.responseText);
-
-            Ti.API.info(JSON.stringify(response));
-
-            if (response.errors) {
-                var atributoError = Object.keys(response.errors)[0];
-                var mensajeError = response.errors[atributoError][0];
-
-                crouton.alert(L(atributoError)+': '+mensajeError);
-            } else {
-                crouton.alert('Algo salió mal, intenta nuevamente');
-            }
-
-            Alloy.Globals.LO.hide();
-        },
-        timeout: 15000
-    });
-
-    xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-    xhr.setRequestHeader('Authorization', 'Bearer ' + Ti.App.Properties.getString('access_token'));
-    xhr.open('POST', Alloy.CFG.API + '/users/profile');
+    var xhr = API.POST('/users/profile', procesarRespuesta, procesarError, true);
     xhr.send(JSON.stringify(data));
 });
 

@@ -44,24 +44,19 @@ function cargarDatos() {
     xhr.send();
 }
 
+function procesarLogout() {
+    Ti.App.Properties.setBool('registrado', false);
+    Ti.App.Properties.setString('access_token', null);
+    Alloy.createController('entrar', {salir: true});
+
+    Alloy.Globals.LO.hide();
+    $.lugares.close();
+}
+
 function salir() {
     Alloy.Globals.LO.show('Cerrando sesión...');
 
-    var xhr = API.POST(
-        '/logout',
-        function() {
-            Ti.App.Properties.setBool('registrado', false);
-            Ti.App.Properties.setString('access_token', null);
-            Alloy.createController('entrar', {salir: true});
-            $.lugares.close();
-        },
-        function() {
-            crouton.alert('Algo salió mal, intenta nuevamente');
-            Alloy.Globals.LO.hide();
-        },
-        true
-    );
-
+    var xhr = API.POST('/logout', procesarLogout, procesarError, true);
     xhr.send();
 }
 
@@ -78,7 +73,7 @@ $.lugares.activity.onCreateOptionsMenu = function(e) {
     });
 
     e.menu.add({title: 'Mi Perfil'}).addEventListener('click', function() {
-        Alloy.createController('usuario');
+        Alloy.createController('perfil');
     });
 
     e.menu.add({title: 'Salir'}).addEventListener('click', function() {
@@ -106,7 +101,7 @@ $.lugares.addEventListener('open', function() {
 $.lista.addEventListener('itemclick', function(e) {
     var item = e.section.getItemAt(e.itemIndex);
     Alloy.Globals.lugar = item.data;
-    Alloy.createController('lugar_info', item.data);
+    Alloy.createController('lugar', item.data);
 });
 
 $.lugares.open();

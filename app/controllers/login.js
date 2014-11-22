@@ -1,13 +1,22 @@
 var parametros = arguments[0] || {},
-    crouton = require('de.manumaticx.crouton');
+    crouton = require('de.manumaticx.crouton'),
+    API = require('http_client');
 
-function procesarRespuesta(data) {
+function procesarRespuesta(json) {
     Ti.App.Properties.setBool('registrado', true);
-    Ti.App.Properties.setString('access_token', data.access_token);
-    Ti.App.Properties.setObject('user', data);
+    Ti.App.Properties.setString('access_token', json.access_token);
+    Ti.App.Properties.setObject('user', json);
+    Alloy.Globals.LO.hide();
+    Alloy.createController('lugares', {entrar: true});
+    $.ventanaEntrar.close();
 }
 
-$.ventanaEntrar.addEventListener('open', function(e) {
+function procesarError() {
+    crouton.alert('Algo salió mal, intenta nuevamente');
+    Alloy.Globals.LO.hide();
+}
+
+$.ventanaEntrar.addEventListener('open', function() {
     var abx = require('com.alcoapps.actionbarextras');
 
     abx.titleFont = 'SourceSansPro-Black.ttf';
@@ -40,24 +49,7 @@ $.enviar.addEventListener('click', function() {
         password: $.clave.value
     };
 
-    var xhr = Ti.Network.createHTTPClient({
-        onload: function(e) {
-            var json = JSON.parse(this.responseText);
-            procesarRespuesta(json);
-            json = null;
-            Alloy.Globals.LO.hide();
-            Alloy.createController('lugares', {entrar: true});
-            $.ventanaEntrar.close();
-        },
-        onerror: function(e) {
-            crouton.alert('Algo salió mal, intenta nuevamente');
-            Alloy.Globals.LO.hide();
-        },
-        timeout: 15000
-    });
-
-    xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-    xhr.open('POST', Alloy.CFG.API + '/login');
+    var xhr = API.POST('/login', procesarRespuesta, procesarError, false);
     xhr.send(JSON.stringify(data));
 });
 

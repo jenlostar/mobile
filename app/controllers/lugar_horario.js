@@ -1,50 +1,23 @@
 var crouton = require('de.manumaticx.crouton'),
-    accessToken = Ti.App.Properties.getString('access_token'),
+    API = require('http_client'),
     lugar = Alloy.Globals.lugar;
 
 var moment = require('alloy/moment');
 require('alloy/moment/lang/es');
 
 var fechaActual = new Date();
-var anioActual = fechaActual.getFullYear();
-var mesActual = fechaActual.getMonth();
-var diaActual = fechaActual.getDate();
+var anioActual  = fechaActual.getFullYear();
+var mesActual   = fechaActual.getMonth();
+var diaActual   = fechaActual.getDate();
 var fechaMinima = new Date(anioActual, mesActual, diaActual + 1, 7, 0, 0);
 var fechaMaxima = new Date(anioActual, mesActual, diaActual + 8, 7, 0, 0);
 
 var fechaSeleccionada = fechaMinima;
 
-function cargarLista() {
-    var fechaActual = new moment(fechaSeleccionada),
-        dia = fechaActual.format('YYYY-MM-DD'),
-        url = Alloy.CFG.API + '/places/' + lugar.id + '/bookings/' + dia;
-
-    Alloy.Globals.LO.show('Actualizando...');
-
-    var xhr = Ti.Network.createHTTPClient({
-        onload: function(e) {
-            var json = JSON.parse(this.responseText);
-            procesarRespuesta(json);
-            json = null;
-            Alloy.Globals.LO.hide();
-        },
-        onerror: function(e) {
-            crouton.alert('Algo salió mal, intenta nuevamente');
-            Alloy.Globals.LO.hide();
-        },
-        timeout: 15000
-    });
-
-    xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-    xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-    xhr.open('GET', url);
-    xhr.send();
-}
-
-function procesarRespuesta(respuesta) {
+function procesarRespuesta(json) {
     var horasDia = [];
 
-    _.each(respuesta, function(hora) {
+    _.each(json, function(hora) {
         horasDia.push({
             fecha: hora.date,
             fechaCompleta: hora.date_extended,
@@ -67,6 +40,25 @@ function procesarRespuesta(respuesta) {
     });
 
     $.seccionLista.setItems(horasDia);
+
+    Alloy.Globals.LO.hide();
+}
+
+function procesarError() {
+    crouton.alert('Algo salió mal, intenta nuevamente');
+    Alloy.Globals.LO.hide();
+}
+
+function cargarLista() {
+    Alloy.Globals.LO.show('Actualizando...');
+
+    var fechaActual = new moment(fechaSeleccionada);
+    var dia = fechaActual.format('YYYY-MM-DD');
+
+    var url = '/places/' + lugar.id + '/bookings/' + dia;
+
+    var xhr = API.GET(url, procesarRespuesta, procesarError, true);
+    xhr.send();
 }
 
 function actualizarInfoNavegacion() {
@@ -118,7 +110,7 @@ $.controlLista.addEventListener('itemclick', function(e) {
             return;
         }
 
-        item.success = function(respuesta) {
+        item.success = function() {
             cargarLista();
         };
 

@@ -1,17 +1,17 @@
 var lugar = arguments[0] || {};
 
 function cerrar() {
-    $.lugar_info.close({animated: false});
-    $.lugar_info = null;
+    $.lugar.close({animated: false});
+    $.lugar = null;
 }
 
-$.lugar_info.addEventListener('open', function() {
+$.lugar.addEventListener('open', function() {
     var abx = require('com.alcoapps.actionbarextras');
 
     abx.titleFont = 'SourceSansPro-Black.ttf';
     abx.titleColor = '#FFCEAF';
 
-    $.lugar_info.activity.invalidateOptionsMenu();
+    $.lugar.activity.invalidateOptionsMenu();
 });
 
 $.inicio.imagen1.image = lugar.photos[0];
@@ -27,6 +27,6 @@ if (lugar.mobile_phone) {
     $.inicio.telefonoLugar.text += ' - '+lugar.mobile_phone;
 }
 
-$.lugar_info.addEventListener('android:back', cerrar);
+$.lugar.addEventListener('android:back', cerrar);
 
-$.lugar_info.open({animated: false});
+$.lugar.open({animated: false});

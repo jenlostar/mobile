@@ -1,14 +1,32 @@
-var crouton = require('de.manumaticx.crouton');
+var crouton = require('de.manumaticx.crouton'),
+    API = require('http_client');
 
 function atras() {
     Alloy.createController('entrar');
     $.ventanaRegistrar.close();
 }
 
-function procesarRespuesta(data) {
+function procesarRespuesta(json) {
     Ti.App.Properties.setBool('registrado', true);
-    Ti.App.Properties.setString('access_token', data.access_token);
-    Ti.App.Properties.setObject('user', data);
+    Ti.App.Properties.setString('access_token', json.access_token);
+    Ti.App.Properties.setObject('user', json);
+
+    Alloy.Globals.LO.hide();
+    Alloy.createController('lugares', {entrar: true});
+    $.ventanaEntrar.close();
+}
+
+function procesarError(json) {
+    if (json.errors) {
+        var atributoError = Object.keys(json.errors)[0];
+        var mensajeError = json.errors[atributoError][0];
+
+        crouton.alert(L(atributoError)+': '+mensajeError);
+    } else {
+        crouton.alert('Algo salió mal, intenta nuevamente');
+    }
+
+    Alloy.Globals.LO.hide();
 }
 
 $.ventanaRegistrar.addEventListener('android:back', atras);
@@ -44,36 +62,7 @@ $.enviar.addEventListener('click', function() {
         password_confirmation: $.confirmarClave.value
     };
 
-    var xhr = Ti.Network.createHTTPClient({
-        onload: function() {
-            var json = JSON.parse(this.responseText);
-            procesarRespuesta(json);
-            json = null;
-            Alloy.Globals.LO.hide();
-            Alloy.createController('lugares', {entrar: true});
-            $.ventanaEntrar.close();
-        },
-        onerror: function() {
-            var response = JSON.parse(this.responseText);
-
-            Ti.API.info(JSON.stringify(response));
-
-            if (response.errors) {
-                var atributoError = Object.keys(response.errors)[0];
-                var mensajeError = response.errors[atributoError][0];
-
-                crouton.alert(L(atributoError)+': '+mensajeError);
-            } else {
-                crouton.alert('Algo salió mal, intenta nuevamente');
-            }
-
-            Alloy.Globals.LO.hide();
-        },
-        timeout: 15000
-    });
-
-    xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-    xhr.open('POST', Alloy.CFG.API + '/signup');
+    var xhr = API.POST('/signup', procesarRespuesta, procesarError, false);
     xhr.send(JSON.stringify(data));
 });
 

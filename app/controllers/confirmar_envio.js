@@ -1,8 +1,8 @@
 var reserva = arguments[0] || {},
+    API = require('http_client'),
     crouton = require('de.manumaticx.crouton'),
     usuario = Ti.App.Properties.getObject('user'),
-    lugar = Alloy.Globals.lugar,
-    accessToken = Ti.App.Properties.getString('access_token');
+    lugar = Alloy.Globals.lugar;
 
 
 function atras() {
@@ -46,40 +46,33 @@ function crearElementoListaServicio(servicio, index, total) {
     };
 }
 
+function procesarRespuesta(json) {
+    Alloy.Globals.LO.hide();
+    atras();
+
+    if (reserva.success) {
+        reserva.success(json);
+    }
+
+    Alloy.Globals.servicios_seleccionados = {};
+    crouton.info('Se ha creado una nueva solicitud de reserva, en un momento recibira una confirmación via correo electrónico');
+}
+
+function procesarError() {
+    Alloy.Globals.LO.hide();
+    crouton.alert('Algo salió mal, intenta nuevamente');
+}
+
 function enviarReserva(servicios, horaSeleccionada) {
-
-    var xhr = Ti.Network.createHTTPClient({
-        onload: function(respuesta) {
-            Alloy.Globals.LO.hide();
-            atras();
-
-            if (reserva.success) {
-                reserva.success(respuesta);
-            }
-
-            Alloy.Globals.servicios_seleccionados = {};
-
-            crouton.info('Se ha creado una nueva solicitud de reserva, en un momento recibira una confirmación via correo electrónico');
-        },
-        onerror: function() {
-            Alloy.Globals.LO.hide();
-            crouton.alert('Algo salió mal, intenta nuevamente');
-        },
-        timeout: 15000
-    });
-
-    xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-    xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-    xhr.open('POST', Alloy.CFG.API + '/bookings');
-
-    var datosReserva = {
+    var data = {
         user_id: usuario.id,
         place_id: lugar.id,
         date: horaSeleccionada,
         services: servicios
     };
 
-    xhr.send(JSON.stringify(datosReserva));
+    var xhr = API.POST('/bookings', procesarRespuesta, procesarError, true);
+    xhr.send(JSON.stringify(data));
 }
 
 function cargarLista() {
