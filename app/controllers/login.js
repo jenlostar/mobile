@@ -8,7 +8,7 @@ function procesarRespuesta(json) {
     Ti.App.Properties.setObject('user', json);
     Alloy.Globals.LO.hide();
     Alloy.createController('lugares', {entrar: true});
-    $.ventanaEntrar.close();
+    $.ventanaLogin.close();
 }
 
 function procesarError() {
@@ -16,7 +16,7 @@ function procesarError() {
     Alloy.Globals.LO.hide();
 }
 
-$.ventanaEntrar.addEventListener('open', function() {
+$.ventanaLogin.addEventListener('open', function() {
     var abx = require('com.alcoapps.actionbarextras');
 
     abx.titleFont = 'SourceSansPro-Black.ttf';
@@ -26,7 +26,7 @@ $.ventanaEntrar.addEventListener('open', function() {
     abx.subtitleFont = 'SourceSansPro-Semibold.ttf';
     abx.subtitleColor = '#FFCEAF';
 
-    $.ventanaEntrar.activity.invalidateOptionsMenu();
+    $.ventanaLogin.activity.invalidateOptionsMenu();
 
     if (parametros.salir && parametros.salir === true) {
         crouton.info('La sesión ha finalizado');
@@ -37,8 +37,8 @@ require('ui').touchFeedbackButton($.enviar, $.registrarse);
 require('ui').touchFeedbackButton($.recuperarContrasena);
 
 $.registrarse.addEventListener('click', function() {
-    Alloy.createController('registrar');
-    $.ventanaEntrar.close();
+    Alloy.createController('registro');
+    $.ventanaLogin.close();
 });
 
 $.enviar.addEventListener('click', function() {
@@ -53,4 +53,4 @@ $.enviar.addEventListener('click', function() {
     xhr.send(JSON.stringify(data));
 });
 
-$.ventanaEntrar.open();
+$.ventanaLogin.open();

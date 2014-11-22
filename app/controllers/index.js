@@ -1,7 +1,7 @@
 $.index.open();
 
 if (!Ti.App.Properties.getBool('registrado', false)) {
-    Alloy.createController('entrar');
+    Alloy.createController('login');
     $.index.close();
 } else {
     Alloy.createController('lugares');

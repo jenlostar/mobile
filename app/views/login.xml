@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="ventanaEntrar">
+	<Window id="ventanaLogin">
         <ScrollView id="scrollview">
             <View id="contenedor">
                 <TextField id="email" />

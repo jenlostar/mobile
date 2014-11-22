@@ -2,8 +2,8 @@ var crouton = require('de.manumaticx.crouton'),
     API = require('http_client');
 
 function atras() {
-    Alloy.createController('entrar');
-    $.ventanaRegistrar.close();
+    Alloy.createController('login');
+    $.ventanaRegistro.close();
 }
 
 function procesarRespuesta(json) {
@@ -29,11 +29,11 @@ function procesarError(json) {
     Alloy.Globals.LO.hide();
 }
 
-$.ventanaRegistrar.addEventListener('android:back', atras);
+$.ventanaRegistro.addEventListener('android:back', atras);
 
 require('ui').touchFeedbackButton($.enviar);
 
-$.ventanaRegistrar.addEventListener('open', function() {
+$.ventanaRegistro.addEventListener('open', function() {
     var abx = require('com.alcoapps.actionbarextras');
 
     abx.titleFont = 'SourceSansPro-Black.ttf';
@@ -43,9 +43,9 @@ $.ventanaRegistrar.addEventListener('open', function() {
     abx.subtitleFont = 'SourceSansPro-Semibold.ttf';
     abx.subtitleColor = '#FFCEAF';
 
-    $.ventanaRegistrar.activity.actionBar.displayHomeAsUp = true;
-    $.ventanaRegistrar.activity.actionBar.onHomeIconItemSelected = atras;
-    $.ventanaRegistrar.activity.invalidateOptionsMenu();
+    $.ventanaRegistro.activity.actionBar.displayHomeAsUp = true;
+    $.ventanaRegistro.activity.actionBar.onHomeIconItemSelected = atras;
+    $.ventanaRegistro.activity.invalidateOptionsMenu();
 });
 
 $.enviar.addEventListener('click', function() {
@@ -66,4 +66,4 @@ $.enviar.addEventListener('click', function() {
     xhr.send(JSON.stringify(data));
 });
 
-$.ventanaRegistrar.open();
+$.ventanaRegistro.open();

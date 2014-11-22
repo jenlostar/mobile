@@ -1,4 +1,4 @@
-'#ventanaEntrar' : {
+'#ventanaLogin' : {
     width: Ti.UI.FILL,
     height: Ti.UI.FILL,
     backgroundColor: '#FFF7F2'

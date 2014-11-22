@@ -71,11 +71,11 @@ $.enviar.addEventListener('click', function() {
         email: $.email.value
     };
 
-    if (_.isEmpty($.clave.value)) {
+    if (!_.isEmpty($.clave.value)) {
         data.password = $.clave.value;
     }
 
-    if (_.isEmpty($.confirmarClave.value)) {
+    if (!_.isEmpty($.confirmarClave.value)) {
         data.password_confirmation = $.confirmarClave.value;
     }
 

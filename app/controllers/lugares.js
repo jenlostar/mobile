@@ -47,7 +47,7 @@ function cargarDatos() {
 function procesarLogout() {
     Ti.App.Properties.setBool('registrado', false);
     Ti.App.Properties.setString('access_token', null);
-    Alloy.createController('entrar', {salir: true});
+    Alloy.createController('login', {salir: true});
 
     Alloy.Globals.LO.hide();
     $.lugares.close();
