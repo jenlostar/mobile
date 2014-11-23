@@ -18,13 +18,11 @@ function crearElementoLista(item) {
     };
 }
 
-function procesarRespuesta(respuesta) {
+function procesarRespuesta(json) {
     var lugares = [];
 
-    _.each(respuesta, function(lugar) {
-        if (lugar.schedules.length > 0) {
-            lugares.push(crearElementoLista(lugar));
-        }
+    _.each(json, function(lugar) {
+        lugares.push(crearElementoLista(lugar));
     });
 
     $.seccion.setItems(lugares);
