@@ -15,7 +15,11 @@ barraCalificacion = barraCalificacion.createRatingBar({
 function cambiarCalificacion(e) {
     var data = {user_id: usuario.id, place_id: lugar.id, value: e.rating};
 
-    var xhr = API.POST('/ratings', actualizarValores, null, true);
+    var xhr = API.POST({
+        url: '/ratings',
+        onSuccess: actualizarValores
+    });
+
     xhr.send(JSON.stringify(data));
 }
 
@@ -36,9 +40,12 @@ function errorRespuesta() {
 }
 
 function cargarCalificacionActual() {
-    var url = '/ratings/current/' + lugar.id + '/' + usuario.id;
+    var xhr = API.GET({
+        url: '/ratings/current/' + lugar.id + '/' + usuario.id,
+        onSuccess: respuestaCalificacionActual,
+        onError: errorRespuesta
+    });
 
-    var xhr = API.GET(url, respuestaCalificacionActual, errorRespuesta, true);
     xhr.send();
 }
 

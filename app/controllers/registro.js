@@ -58,7 +58,13 @@ function eventoClick() {
         password_confirmation: $.confirmarClave.value
     };
 
-    var xhr = API.POST('/signup', procesarRespuesta, procesarError, false);
+    var xhr = API.POST({
+        url: '/signup',
+        onSuccess: procesarRespuesta,
+        onError: procesarError,
+        authorization: false
+    });
+
     xhr.send(JSON.stringify(data));
 }
 

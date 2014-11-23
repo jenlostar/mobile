@@ -46,7 +46,13 @@ function eventoClickLogin() {
         password: $.clave.value
     };
 
-    var post = API.POST('/login', procesarRespuesta, procesarError, false);
+    var post = API.POST({
+        endpoint: '/login',
+        onSuccess: procesarRespuesta,
+        onError: procesarError,
+        authorization: false
+    });
+
     post.send(JSON.stringify(data));
 }
 

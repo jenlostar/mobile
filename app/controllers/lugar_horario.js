@@ -55,9 +55,12 @@ function cargarLista() {
     var fechaActual = new moment(fechaSeleccionada);
     var dia = fechaActual.format('YYYY-MM-DD');
 
-    var url = '/places/' + lugar.id + '/bookings/' + dia;
+    var xhr = API.GET({
+        url: '/places/' + lugar.id + '/bookings/' + dia,
+        onSuccess: procesarRespuesta,
+        onError: procesarError
+    });
 
-    var xhr = API.GET(url, procesarRespuesta, procesarError, true);
     xhr.send();
 }
 

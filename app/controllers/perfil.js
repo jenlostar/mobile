@@ -74,7 +74,12 @@ function eventoClick() {
         data.password_confirmation = $.confirmarClave.value;
     }
 
-    var xhr = API.POST('/users/profile', procesarRespuesta, procesarError, true);
+    var xhr = API.POST({
+        url: '/users/profile',
+        onSuccess: procesarRespuesta,
+        onError: procesarError
+    });
+
     xhr.send(JSON.stringify(data));
 }
 

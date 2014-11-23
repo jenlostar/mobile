@@ -71,7 +71,12 @@ function enviarReserva(servicios, horaSeleccionada) {
         services: servicios
     };
 
-    var xhr = API.POST('/bookings', procesarRespuesta, procesarError, true);
+    var xhr = API.POST({
+        url: '/bookings',
+        onSuccess: procesarRespuesta,
+        onError: procesarError
+    });
+
     xhr.send(JSON.stringify(data));
 }
 

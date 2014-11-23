@@ -38,7 +38,13 @@ function procesarError() {
 
 function cargarLugares() {
     Alloy.Globals.LO.show('Cargando...');
-    var xhr = API.GET('/places', procesarRespuesta, procesarError, true);
+
+    var xhr = API.GET({
+        url: '/places',
+        onSuccess: procesarRespuesta,
+        onError: procesarError
+    });
+
     xhr.send();
 }
 
@@ -53,7 +59,13 @@ function procesarLogout() {
 
 function eventoCerrarSesion() {
     Alloy.Globals.LO.show('Cerrando sesión...');
-    var xhr = API.POST('/logout', procesarLogout, procesarError, true);
+
+    var xhr = API.POST({
+        url: '/logout',
+        onSuccess: procesarLogout,
+        onError: procesarError
+    });
+
     xhr.send();
 }
 

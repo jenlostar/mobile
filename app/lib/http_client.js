@@ -1,17 +1,19 @@
-function crearObjeto(onLoad, onError, autenticado) {
+function crearObjeto(options) {
+    options = _.extend(options, {authorization: true});
+
     var xhr = Ti.Network.createHTTPClient({
         onload: function() {
-            if (onLoad) {
+            if (options.onSuccess) {
                 var json = JSON.parse(this.responseText);
-                onLoad(json);
+                options.onSuccess(json);
                 json = null;
             }
         },
         onerror: function() {
-            if (onError) {
+            if (options.onError) {
                 var json = JSON.parse(this.responseText);
-                onError(json);
-                json = null
+                options.onError(json);
+                json = null;
             }
         },
         timeout: 15000
@@ -19,7 +21,7 @@ function crearObjeto(onLoad, onError, autenticado) {
 
     xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
 
-    if (autenticado) {
+    if (options.authorization) {
         var accessToken = Ti.App.Properties.getString('access_token');
         xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
         accessToken = null;
@@ -28,14 +30,16 @@ function crearObjeto(onLoad, onError, autenticado) {
     return xhr;
 }
 
-exports.POST = function(url, onLoad, onError, autenticado) {
-    var xhr = crearObjeto(onLoad, onError, autenticado)
-    xhr.open('POST', Alloy.CFG.API + url);
-    return xhr;
-};
-
-exports.GET = function(url, onLoad, onError, autenticado) {
-    var xhr = crearObjeto(onLoad, onError, autenticado)
-    xhr.open('GET', Alloy.CFG.API + url);
+function crearPeticion(metodo, options) {
+    var xhr = crearObjeto(options);
+    xhr.open(metodo, Alloy.CFG.API + options.endpoint);
     return xhr;
 }
+
+exports.POST = function(options) {
+    return crearPeticion('POST', options);
+};
+
+exports.GET = function(options) {
+    return crearPeticion('GET', options);
+};
