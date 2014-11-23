@@ -3,17 +3,17 @@ var parametros = arguments[0] || {},
     crouton = require('de.manumaticx.crouton'),
     buscar = Ti.UI.Android.createSearchView({hintText : 'Buscar'});
 
-function crearElementoLista(item) {
+function crearElementoLista(lugar) {
     return {
-        data: item,
-        nombre: {text: item.name},
-        descripcion: {text: item.description},
+        data: lugar,
+        nombre: {text: lugar.name},
+        descripcion: {text: lugar.description},
         properties: {
             width: Ti.UI.FILL,
             height: Ti.UI.SIZE,
             backgroundColor: 'transparent',
             selectedBackgroundColor: '#FF6600',
-            searchableText: item.name +' '+ item.description,
+            searchableText: lugar.name +' '+ lugar.description,
         }
     };
 }
