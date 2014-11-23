@@ -12,9 +12,10 @@
 Alloy.Globals.lugar = null;
 Alloy.Globals.servicios_seleccionados = {};
 
-Alloy.Globals.LO = Alloy.createWidget('com.caffeinalab.titanium.loader', {
+Alloy.Globals.Loader = Alloy.createWidget('com.caffeinalab.titanium.loader', {
     cancelable: true,
     useImages: false
 });
 
 Alloy.Globals.icons = require('icons').charMap;
+Alloy.Globals.crouton = require('de.manumaticx.crouton');

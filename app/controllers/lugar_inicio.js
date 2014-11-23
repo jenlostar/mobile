@@ -1,5 +1,4 @@
-var crouton = require('de.manumaticx.crouton'),
-    barraCalificacion = require('titutorial.ratingbar'),
+var barraCalificacion = require('titutorial.ratingbar'),
     API = require('http_client'),
     usuario = Ti.App.Properties.getObject('user'),
     lugar = Alloy.Globals.lugar;
@@ -30,13 +29,13 @@ function actualizarValores(json) {
 
 function respuestaCalificacionActual(json) {
     actualizarValores(json);
-    Alloy.Globals.LO.hide();
+    Alloy.Globals.Loader.hide();
     barraCalificacion.addEventListener('change', cambiarCalificacion);
 }
 
 function errorRespuesta() {
-    crouton.alert('Algo salió mal, intenta nuevamente');
-    Alloy.Globals.LO.hide();
+    Alloy.Globals.crouton.alert('Algo salió mal, intenta nuevamente');
+    Alloy.Globals.Loader.hide();
 }
 
 function cargarCalificacionActual() {

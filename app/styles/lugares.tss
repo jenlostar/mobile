@@ -7,19 +7,11 @@
     backgroundColor: '#FFF7F2'
 },
 
-'#elementoLista': {
-    backgroundColor: '#FFF7F2',
-    top: '5dip',
-    bottom: '5dip',
-    left: '5dip',
-    right: '5dip',
-    layout: 'composite'
-},
-
 '#infoLugar': {
+    backgroundColor: '#FFF7F2',
     left: '2dip',
     right: '2dip',
-    layout: 'horizontal',
+    layout: 'vertical',
     height: Ti.UI.SIZE,
     width: Ti.UI.FILL
 },

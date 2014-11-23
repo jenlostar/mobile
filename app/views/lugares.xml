@@ -3,11 +3,9 @@
         <ListView id="lista" defaultItemTemplate="default">
             <Templates>
                 <ItemTemplate name="default">
-                    <View id="elementoLista">
-                        <View id="infoLugar">
-                            <Label id="nombre" bindId="nombre"/>
-                            <Label id="descripcion" bindId="descripcion"/>
-                        </View>
+                    <View id="infoLugar">
+                        <Label id="nombre" bindId="nombre"/>
+                        <Label id="descripcion" bindId="descripcion"/>
                     </View>
                 </ItemTemplate>
             </Templates>

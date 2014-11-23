@@ -1,41 +1,35 @@
 var parametros = arguments[0] || {},
     API = require('http_client'),
-    crouton = require('de.manumaticx.crouton'),
     buscar = Ti.UI.Android.createSearchView({hintText : 'Buscar'});
 
-function crearElementoLista(lugar) {
-    return {
-        data: lugar,
-        nombre: {text: lugar.name},
-        descripcion: {text: lugar.description},
-        properties: {
-            width: Ti.UI.FILL,
-            height: Ti.UI.SIZE,
-            backgroundColor: 'transparent',
-            selectedBackgroundColor: '#FF6600',
-            searchableText: lugar.name +' '+ lugar.description,
-        }
-    };
-}
-
-function procesarRespuesta(json) {
+function procesarRespuesta(jsonArray) {
     var lugares = [];
 
-    _.each(json, function(lugar) {
-        lugares.push(crearElementoLista(lugar));
+    _.each(jsonArray, function(lugar) {
+        lugares.push({
+            data: lugar,
+            nombre: {text: lugar.name},
+            descripcion: {text: lugar.description},
+            properties: {
+                width: Ti.UI.FILL,
+                height: Ti.UI.SIZE,
+                backgroundColor: 'transparent',
+                searchableText: lugar.name +' '+ lugar.description,
+            }
+        });
     });
 
     $.seccion.setItems(lugares);
-    Alloy.Globals.LO.hide();
+    Alloy.Globals.Loader.hide();
 }
 
 function procesarError() {
-    crouton.alert('Algo salió mal, intenta nuevamente');
-    Alloy.Globals.LO.hide();
+    Alloy.Globals.crouton.alert('Algo salió mal, intenta nuevamente');
+    Alloy.Globals.Loader.hide();
 }
 
 function cargarLugares() {
-    Alloy.Globals.LO.show('Cargando...');
+    Alloy.Globals.Loader.show('Cargando...');
 
     var xhr = API.GET({
         endpoint: '/places',
@@ -51,12 +45,12 @@ function procesarLogout() {
     Ti.App.Properties.setString('access_token', null);
     Alloy.createController('login', {salir: true});
 
-    Alloy.Globals.LO.hide();
+    Alloy.Globals.Loader.hide();
     $.lugares.close();
 }
 
 function eventoCerrarSesion() {
-    Alloy.Globals.LO.show('Cerrando sesión...');
+    Alloy.Globals.Loader.show('Cerrando sesión...');
 
     var xhr = API.POST({
         endpoint: '/logout',
@@ -97,7 +91,7 @@ function eventoOpen() {
     $.lugares.activity.invalidateOptionsMenu();
 
     if (parametros.entrar && parametros.entrar === true) {
-        crouton.confirm('Bievenido/a');
+        Alloy.Globals.crouton.confirm('Bievenido/a');
     }
 }
 

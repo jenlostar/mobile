@@ -1,6 +1,5 @@
 var reserva = arguments[0] || {},
     API = require('http_client'),
-    crouton = require('de.manumaticx.crouton'),
     usuario = Ti.App.Properties.getObject('user'),
     lugar = Alloy.Globals.lugar;
 
@@ -47,7 +46,7 @@ function crearElementoListaServicio(servicio, index, total) {
 }
 
 function procesarRespuesta(json) {
-    Alloy.Globals.LO.hide();
+    Alloy.Globals.Loader.hide();
     atras();
 
     if (reserva.success) {
@@ -55,12 +54,12 @@ function procesarRespuesta(json) {
     }
 
     Alloy.Globals.servicios_seleccionados = {};
-    crouton.info('Se ha creado una nueva solicitud de reserva, en un momento recibira una confirmación via correo electrónico');
+    Alloy.Globals.crouton.info('Se ha creado una nueva solicitud de reserva, en un momento recibira una confirmación via correo electrónico');
 }
 
 function procesarError() {
-    Alloy.Globals.LO.hide();
-    crouton.alert('Algo salió mal, intenta nuevamente');
+    Alloy.Globals.Loader.hide();
+    Alloy.Globals.crouton.alert('Algo salió mal, intenta nuevamente');
 }
 
 function enviarReserva(servicios, horaSeleccionada) {
@@ -120,7 +119,7 @@ $.ventanaConfirmar.addEventListener('open', function() {
 });
 
 $.enviar.addEventListener('click', function() {
-    Alloy.Globals.LO.show('Enviando...');
+    Alloy.Globals.Loader.show('Enviando...');
 
     var servicios_id = _.keys(Alloy.Globals.servicios_seleccionados);
     enviarReserva(servicios_id, reserva.fecha);

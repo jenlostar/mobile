@@ -1,5 +1,4 @@
-var crouton = require('de.manumaticx.crouton'),
-    API = require('http_client'),
+var API = require('http_client'),
     datosUsuario = Ti.App.Properties.getObject('user');
 
 $.email.value = datosUsuario.email;
@@ -22,7 +21,7 @@ function procesarRespuesta(data) {
     Ti.App.Properties.setString('access_token', data.access_token);
     Ti.App.Properties.setObject('user', data);
 
-    Alloy.Globals.LO.hide();
+    Alloy.Globals.Loader.hide();
     $.ventanaUsuario.close();
 }
 
@@ -31,12 +30,12 @@ function procesarError(json) {
         var atributoError = Object.keys(json.errors)[0];
         var mensajeError = json.errors[atributoError][0];
 
-        crouton.alert(L(atributoError)+': '+mensajeError);
+        Alloy.Globals.crouton.alert(L(atributoError)+': '+mensajeError);
     } else {
-        crouton.alert('Algo salió mal, intenta nuevamente');
+        Alloy.Globals.crouton.alert('Algo salió mal, intenta nuevamente');
     }
 
-    Alloy.Globals.LO.hide();
+    Alloy.Globals.Loader.hide();
 }
 
 function eventoOpen() {
@@ -55,7 +54,7 @@ function eventoOpen() {
 }
 
 function eventoClick() {
-    Alloy.Globals.LO.show('Enviando...');
+    Alloy.Globals.Loader.show('Enviando...');
     var filaSeleccionada = $.genero.getSelectedRow(0);
 
     var data = {

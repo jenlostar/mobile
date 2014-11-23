@@ -1,5 +1,4 @@
-var crouton = require('de.manumaticx.crouton'),
-    API = require('http_client'),
+var API = require('http_client'),
     lugar = Alloy.Globals.lugar;
 
 var moment = require('alloy/moment');
@@ -41,16 +40,16 @@ function procesarRespuesta(json) {
 
     $.seccionLista.setItems(horasDia);
 
-    Alloy.Globals.LO.hide();
+    Alloy.Globals.Loader.hide();
 }
 
 function procesarError() {
-    crouton.alert('Algo salió mal, intenta nuevamente');
-    Alloy.Globals.LO.hide();
+    Alloy.Globals.crouton.alert('Algo salió mal, intenta nuevamente');
+    Alloy.Globals.Loader.hide();
 }
 
 function cargarLista() {
-    Alloy.Globals.LO.show('Actualizando...');
+    Alloy.Globals.Loader.show('Actualizando...');
 
     var fechaActual = new moment(fechaSeleccionada);
     var dia = fechaActual.format('YYYY-MM-DD');
@@ -99,7 +98,7 @@ function eventoClickHora(e) {
     var item = e.section.getItemAt(e.itemIndex);
     if(item.disponible) {
         if(_.isEmpty(Alloy.Globals.servicios_seleccionados)) {
-            crouton.alert('Debe seleccionar por lo menos un servicio para continuar con la reserva');
+            Alloy.Globals.crouton.alert('Debe seleccionar por lo menos un servicio para continuar con la reserva');
             return;
         }
 
@@ -109,7 +108,7 @@ function eventoClickHora(e) {
 
         Alloy.createController('confirmar_envio', item);
     } else {
-        crouton.alert('La hora seleccionada no esta disponible');
+        Alloy.Globals.crouton.alert('La hora seleccionada no esta disponible');
     }
 }
 

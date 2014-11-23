@@ -1,19 +1,18 @@
 var parametros = arguments[0] || {},
-    crouton = require('de.manumaticx.crouton'),
     API = require('http_client');
 
 function procesarRespuesta(json) {
     Ti.App.Properties.setBool('logueado', true);
     Ti.App.Properties.setString('access_token', json.access_token);
     Ti.App.Properties.setObject('user', json);
-    Alloy.Globals.LO.hide();
+    Alloy.Globals.Loader.hide();
     Alloy.createController('lugares', {entrar: true});
     $.ventanaLogin.close();
 }
 
 function procesarError() {
-    crouton.alert('Algo salió mal, intenta nuevamente');
-    Alloy.Globals.LO.hide();
+    Alloy.Globals.crouton.alert('Algo salió mal, intenta nuevamente');
+    Alloy.Globals.Loader.hide();
 }
 
 function eventoOpen() {
@@ -29,7 +28,7 @@ function eventoOpen() {
     $.ventanaLogin.activity.invalidateOptionsMenu();
 
     if (parametros.salir && parametros.salir === true) {
-        crouton.info('La sesión ha finalizado');
+        Alloy.Globals.crouton.info('La sesión ha finalizado');
     }
 }
 
@@ -39,7 +38,7 @@ function eventoClickRegistro() {
 }
 
 function eventoClickLogin() {
-    Alloy.Globals.LO.show('Enviando...');
+    Alloy.Globals.Loader.show('Enviando...');
 
     var data = {
         email: $.email.value,
