@@ -16,7 +16,7 @@ function cambiarCalificacion(e) {
     var data = {user_id: usuario.id, place_id: lugar.id, value: e.rating};
 
     var xhr = API.POST({
-        url: '/ratings',
+        endpoint: '/ratings',
         onSuccess: actualizarValores
     });
 
@@ -41,7 +41,7 @@ function errorRespuesta() {
 
 function cargarCalificacionActual() {
     var xhr = API.GET({
-        url: '/ratings/current/' + lugar.id + '/' + usuario.id,
+        endpoint: '/ratings/current/' + lugar.id + '/' + usuario.id,
         onSuccess: respuestaCalificacionActual,
         onError: errorRespuesta
     });

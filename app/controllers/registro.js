@@ -59,7 +59,7 @@ function eventoClick() {
     };
 
     var xhr = API.POST({
-        url: '/signup',
+        endpoint: '/signup',
         onSuccess: procesarRespuesta,
         onError: procesarError,
         authorization: false

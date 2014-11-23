@@ -75,7 +75,7 @@ function eventoClick() {
     }
 
     var xhr = API.POST({
-        url: '/users/profile',
+        endpoint: '/users/profile',
         onSuccess: procesarRespuesta,
         onError: procesarError
     });

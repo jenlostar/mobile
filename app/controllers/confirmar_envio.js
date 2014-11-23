@@ -72,7 +72,7 @@ function enviarReserva(servicios, horaSeleccionada) {
     };
 
     var xhr = API.POST({
-        url: '/bookings',
+        endpoint: '/bookings',
         onSuccess: procesarRespuesta,
         onError: procesarError
     });
