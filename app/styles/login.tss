@@ -51,7 +51,7 @@
     }
 },
 
-'#enviar': {
+'#entrar': {
     top: '15dip',
     title: 'Entrar',
     backgroundColor: '#FF6600',

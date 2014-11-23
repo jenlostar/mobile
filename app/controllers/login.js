@@ -3,7 +3,7 @@ var parametros = arguments[0] || {},
     API = require('http_client');
 
 function procesarRespuesta(json) {
-    Ti.App.Properties.setBool('registrado', true);
+    Ti.App.Properties.setBool('logueado', true);
     Ti.App.Properties.setString('access_token', json.access_token);
     Ti.App.Properties.setObject('user', json);
     Alloy.Globals.LO.hide();
@@ -16,7 +16,7 @@ function procesarError() {
     Alloy.Globals.LO.hide();
 }
 
-$.ventanaLogin.addEventListener('open', function() {
+function eventoOpen() {
     var abx = require('com.alcoapps.actionbarextras');
 
     abx.titleFont = 'SourceSansPro-Black.ttf';
@@ -31,17 +31,14 @@ $.ventanaLogin.addEventListener('open', function() {
     if (parametros.salir && parametros.salir === true) {
         crouton.info('La sesión ha finalizado');
     }
-});
+}
 
-require('ui').touchFeedbackButton($.enviar, $.registrarse);
-require('ui').touchFeedbackButton($.recuperarContrasena);
-
-$.registrarse.addEventListener('click', function() {
+function eventoClickRegistro() {
     Alloy.createController('registro');
     $.ventanaLogin.close();
-});
+}
 
-$.enviar.addEventListener('click', function() {
+function eventoClickLogin() {
     Alloy.Globals.LO.show('Enviando...');
 
     var data = {
@@ -49,8 +46,15 @@ $.enviar.addEventListener('click', function() {
         password: $.clave.value
     };
 
-    var xhr = API.POST('/login', procesarRespuesta, procesarError, false);
-    xhr.send(JSON.stringify(data));
-});
+    var post = API.POST('/login', procesarRespuesta, procesarError, false);
+    post.send(JSON.stringify(data));
+}
+
+require('ui').touchFeedbackButton($.entrar, $.registrarse);
+require('ui').touchFeedbackButton($.recuperarContrasena);
+
+$.ventanaLogin.addEventListener('open', eventoOpen);
+$.registrarse.addEventListener('click', eventoClickRegistro);
+$.entrar.addEventListener('click', eventoClickLogin);
 
 $.ventanaLogin.open();

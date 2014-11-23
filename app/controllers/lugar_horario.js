@@ -72,27 +72,7 @@ function actualizarInfoNavegacion() {
     $.diaActualNavegacion.text = fechaActual.format('dddd DD MMMM');
 }
 
-cargarLista();
-
-require('ui').touchFeedbackNavigation($.anterior, $.siguiente);
-
-$.ventanaReservas.addEventListener('focus', function() {
-    actualizarInfoNavegacion();
-});
-
-$.anterior.setVisible(false);
-
-$.siguiente.addEventListener('click', function() {
-    var diaSiguiente = new moment(fechaSeleccionada).startOf('day').add(1, 'day');
-    fechaSeleccionada = diaSiguiente.toDate();
-    actualizarInfoNavegacion();
-    cargarLista();
-
-    $.anterior.setVisible(!diaSiguiente.isBefore(fechaMinima));
-    $.siguiente.setVisible(!diaSiguiente.isAfter(fechaMaxima));
-});
-
-$.anterior.addEventListener('click', function() {
+function eventoClickAnterior() {
     var diaAnterior = new moment(fechaSeleccionada).startOf('day').subtract(1, 'day');
     fechaSeleccionada = diaAnterior.toDate();
     actualizarInfoNavegacion();
@@ -100,9 +80,19 @@ $.anterior.addEventListener('click', function() {
 
     $.anterior.setVisible(!diaAnterior.isBefore(fechaMinima));
     $.siguiente.setVisible(!diaAnterior.isAfter(fechaMaxima));
-});
+}
 
-$.controlLista.addEventListener('itemclick', function(e) {
+function eventoClickSiguiente() {
+    var diaSiguiente = new moment(fechaSeleccionada).startOf('day').add(1, 'day');
+    fechaSeleccionada = diaSiguiente.toDate();
+    actualizarInfoNavegacion();
+    cargarLista();
+
+    $.anterior.setVisible(!diaSiguiente.isBefore(fechaMinima));
+    $.siguiente.setVisible(!diaSiguiente.isAfter(fechaMaxima));
+}
+
+function eventoClickHora(e) {
     var item = e.section.getItemAt(e.itemIndex);
     if(item.disponible) {
         if(_.isEmpty(Alloy.Globals.servicios_seleccionados)) {
@@ -118,4 +108,19 @@ $.controlLista.addEventListener('itemclick', function(e) {
     } else {
         crouton.alert('La hora seleccionada no esta disponible');
     }
-});
+}
+
+function eventoFocoVentana() {
+    actualizarInfoNavegacion();
+}
+
+require('ui').touchFeedbackNavigation($.anterior, $.siguiente);
+
+$.anterior.setVisible(false);
+
+$.ventanaReservas.addEventListener('focus', eventoFocoVentana);
+$.siguiente.addEventListener('click', eventoClickSiguiente);
+$.anterior.addEventListener('click', eventoClickAnterior);
+$.controlLista.addEventListener('itemclick', eventoClickHora);
+
+cargarLista();

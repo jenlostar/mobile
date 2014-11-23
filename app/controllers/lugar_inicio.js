@@ -1,5 +1,4 @@
-var parametros = arguments[0] || {},
-    crouton = require('de.manumaticx.crouton'),
+var crouton = require('de.manumaticx.crouton'),
     barraCalificacion = require('titutorial.ratingbar'),
     API = require('http_client'),
     usuario = Ti.App.Properties.getObject('user'),

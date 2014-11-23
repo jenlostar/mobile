@@ -2,7 +2,6 @@ var crouton = require('de.manumaticx.crouton'),
     API = require('http_client'),
     datosUsuario = Ti.App.Properties.getObject('user');
 
-
 $.email.value = datosUsuario.email;
 $.nombres.value = datosUsuario.first_name;
 $.apellidos.value = datosUsuario.last_name;
@@ -14,12 +13,12 @@ if (datosUsuario.gender == 'M') { // Masculino
     $.genero.setSelectedRow(0, 1);
 }
 
-function atras() {
+function eventoAtras() {
     $.ventanaUsuario.close();
 }
 
 function procesarRespuesta(data) {
-    Ti.App.Properties.setBool('registrado', true);
+    Ti.App.Properties.setBool('logueado', true);
     Ti.App.Properties.setString('access_token', data.access_token);
     Ti.App.Properties.setObject('user', data);
 
@@ -40,11 +39,7 @@ function procesarError(json) {
     Alloy.Globals.LO.hide();
 }
 
-$.ventanaUsuario.addEventListener('android:back', atras);
-
-require('ui').touchFeedbackButton($.enviar);
-
-$.ventanaUsuario.addEventListener('open', function() {
+function eventoOpen() {
     var abx = require('com.alcoapps.actionbarextras');
 
     abx.titleFont = 'SourceSansPro-Black.ttf';
@@ -55,11 +50,11 @@ $.ventanaUsuario.addEventListener('open', function() {
     abx.subtitleColor = '#FFCEAF';
 
     $.ventanaUsuario.activity.actionBar.displayHomeAsUp = true;
-    $.ventanaUsuario.activity.actionBar.onHomeIconItemSelected = atras;
+    $.ventanaUsuario.activity.actionBar.onHomeIconItemSelected = eventoAtras;
     $.ventanaUsuario.activity.invalidateOptionsMenu();
-});
+}
 
-$.enviar.addEventListener('click', function() {
+function eventoClick() {
     Alloy.Globals.LO.show('Enviando...');
     var filaSeleccionada = $.genero.getSelectedRow(0);
 
@@ -81,6 +76,12 @@ $.enviar.addEventListener('click', function() {
 
     var xhr = API.POST('/users/profile', procesarRespuesta, procesarError, true);
     xhr.send(JSON.stringify(data));
-});
+}
+
+require('ui').touchFeedbackButton($.enviar);
+
+$.ventanaUsuario.addEventListener('android:back', eventoAtras);
+$.ventanaUsuario.addEventListener('open', eventoOpen);
+$.enviar.addEventListener('click', eventoClick);
 
 $.ventanaUsuario.open();

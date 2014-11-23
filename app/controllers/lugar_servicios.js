@@ -1,5 +1,3 @@
-var parametros = arguments[0] || {};
-
 var serviciosAgrupados = _.groupBy(Alloy.Globals.lugar.services, 'kind');
 
 function crearElementoListaTipoServicio(nombre) {
@@ -42,7 +40,7 @@ function cargarLista() {
     $.seccionLista.setItems(lista);
 }
 
-$.controlLista.addEventListener('itemclick', function(e) {
+function eventoClick(e) {
     var item = e.section.getItemAt(e.itemIndex);
 
     if (item.itemCheck) {
@@ -56,7 +54,9 @@ $.controlLista.addEventListener('itemclick', function(e) {
         }
 
         e.section.updateItemAt(e.itemIndex, item);
-    }
-});
+    }   
+}
+
+$.controlLista.addEventListener('itemclick', eventoClick);
 
 cargarLista();

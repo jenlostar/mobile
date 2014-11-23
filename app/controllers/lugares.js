@@ -1,9 +1,7 @@
 var parametros = arguments[0] || {},
     API = require('http_client'),
     crouton = require('de.manumaticx.crouton'),
-    buscar = Ti.UI.Android.createSearchView({
-        hintText : 'Buscar'
-    });
+    buscar = Ti.UI.Android.createSearchView({hintText : 'Buscar'});
 
 function crearElementoLista(item) {
     return {
@@ -38,14 +36,14 @@ function procesarError() {
     Alloy.Globals.LO.hide();
 }
 
-function cargarDatos() {
+function cargarLugares() {
     Alloy.Globals.LO.show('Cargando...');
     var xhr = API.GET('/places', procesarRespuesta, procesarError, true);
     xhr.send();
 }
 
 function procesarLogout() {
-    Ti.App.Properties.setBool('registrado', false);
+    Ti.App.Properties.setBool('logueado', false);
     Ti.App.Properties.setString('access_token', null);
     Alloy.createController('login', {salir: true});
 
@@ -53,14 +51,21 @@ function procesarLogout() {
     $.lugares.close();
 }
 
-function salir() {
+function eventoCerrarSesion() {
     Alloy.Globals.LO.show('Cerrando sesión...');
-
     var xhr = API.POST('/logout', procesarLogout, procesarError, true);
     xhr.send();
 }
 
-$.lugares.activity.onCreateOptionsMenu = function(e) {
+function eventoAbrirPerfil() {
+    Alloy.createController('perfil');
+}
+
+function eventoActualizarLugares() {
+    cargarLugares();
+}
+
+function crearMenu(e) {
     e.menu.add({
         title: 'Buscar lugar',
         icon: Ti.Android.R.drawable.ic_menu_search,
@@ -68,24 +73,12 @@ $.lugares.activity.onCreateOptionsMenu = function(e) {
         showAsAction: Ti.Android.SHOW_AS_ACTION_IF_ROOM
     });
 
-    e.menu.add({title: 'Actualizar'}).addEventListener('click', function() {
-        cargarDatos();
-    });
+    e.menu.add({title: 'Actualizar'}).addEventListener('click', eventoActualizarLugares);
+    e.menu.add({title: 'Mi Perfil'}).addEventListener('click', eventoAbrirPerfil);
+    e.menu.add({title: 'Salir'}).addEventListener('click', eventoCerrarSesion);
+}
 
-    e.menu.add({title: 'Mi Perfil'}).addEventListener('click', function() {
-        Alloy.createController('perfil');
-    });
-
-    e.menu.add({title: 'Salir'}).addEventListener('click', function() {
-        salir();
-    });
-};
-
-buscar.addEventListener('change', function() {
-    $.lista.setSearchText(buscar.value);
-});
-
-$.lugares.addEventListener('open', function() {
+function eventoOpen() {
     var abx = require('com.alcoapps.actionbarextras');
 
     abx.titleFont = 'SourceSansPro-Black.ttf';
@@ -96,13 +89,24 @@ $.lugares.addEventListener('open', function() {
     if (parametros.entrar && parametros.entrar === true) {
         crouton.confirm('Bievenido/a');
     }
-});
+}
 
-$.lista.addEventListener('itemclick', function(e) {
+function eventoClick(e) {
     var item = e.section.getItemAt(e.itemIndex);
     Alloy.Globals.lugar = item.data;
     Alloy.createController('lugar', item.data);
-});
+}
+
+function eventoBuscar() {
+    $.lista.setSearchText(buscar.value);
+}
+
+$.lugares.activity.onCreateOptionsMenu = crearMenu;
+
+buscar.addEventListener('change', eventoBuscar);
+$.lugares.addEventListener('open', eventoOpen);
+$.lista.addEventListener('itemclick', eventoClick);
 
 $.lugares.open();
-cargarDatos();
+
+cargarLugares();
