@@ -5,29 +5,31 @@ var moment = require('alloy/moment');
 require('alloy/moment/lang/es');
 
 var fechaActual = new Date();
-var anioActual  = fechaActual.getFullYear();
-var mesActual   = fechaActual.getMonth();
-var diaActual   = fechaActual.getDate();
-var fechaMinima = new Date(anioActual, mesActual, diaActual + 1, 7, 0, 0);
-var fechaMaxima = new Date(anioActual, mesActual, diaActual + 8, 7, 0, 0);
+var anio        = fechaActual.getFullYear();
+var mes         = fechaActual.getMonth();
+var dia         = fechaActual.getDate();
+var fechaMinima = new Date(anio, mes, dia + 1, 7, 0, 0);
+var fechaMaxima = new Date(anio, mes, dia + 7, 7, 0, 0);
 
 var fechaSeleccionada = fechaMinima;
 
-function procesarRespuesta(json) {
-    var horasDia = [];
+function textoEstado(disponible) {
+    return disponible ? 'Disponible' : 'Ocupado';
+}
 
-    _.each(json, function(hora) {
-        horasDia.push({
+function colorEstado(disponible) {
+    return disponible ? '#555555' : '#CCCCCC';
+}
+
+function procesarRespuesta(jsonArray) {
+    var listItems = [];
+
+    _.each(jsonArray, function(hora) {
+        var item = {
             fecha: hora.date,
             fechaCompleta: hora.date_extended,
             hora: {text: hora.hour_with_meridian},
-            estado: {
-                text: hora.available ? 'Disponible' : 'Ocupado',
-                font: {
-                    fontFamily: hora.available ? 'SourceSansPro-Regular' : 'SourceSansPro-Light',
-                    fontSize: '24sp'
-                }
-            },
+            estado: {text: textoEstado(hora.available), color: colorEstado(hora.available)},
             disponible: hora.available,
             properties: {
                 width: Ti.UI.FILL,
@@ -35,10 +37,12 @@ function procesarRespuesta(json) {
                 backgroundColor: 'transparent',
                 layout: 'horizontal'
             }
-        });
+        };
+
+        listItems.push(item);
     });
 
-    $.seccionLista.setItems(horasDia);
+    $.seccionLista.setItems(listItems);
 
     Alloy.Globals.Loader.hide();
 }
@@ -51,11 +55,10 @@ function procesarError() {
 function cargarLista() {
     Alloy.Globals.Loader.show('Actualizando...');
 
-    var fechaActual = new moment(fechaSeleccionada);
-    var dia = fechaActual.format('YYYY-MM-DD');
+    var fecha = new moment(fechaSeleccionada);
 
     var xhr = API.GET({
-        endpoint: '/places/' + lugar.id + '/bookings/' + dia,
+        endpoint: '/places/' + lugar.id + '/bookings/' + fecha.format('YYYY-MM-DD'),
         onSuccess: procesarRespuesta,
         onError: procesarError
     });
@@ -65,13 +68,16 @@ function cargarLista() {
 
 function actualizarInfoNavegacion() {
     var abx = require('com.alcoapps.actionbarextras'),
-        fechaActual = new moment(fechaSeleccionada);
+        fecha = new moment(fechaSeleccionada);
 
-    abx.subtitle = fechaActual.format('dddd DD MMMM');
+    abx.subtitle = fecha.format('dddd DD MMMM');
     abx.subtitleFont = 'SourceSansPro-Semibold.ttf';
     abx.subtitleColor = '#FFCEAF';
 
-    $.diaActualNavegacion.text = fechaActual.format('dddd DD MMMM');
+    $.diaActualNavegacion.text = fecha.format('dddd DD MMMM');
+
+    $.anterior.setVisible(!fecha.isBefore(fechaMinima));
+    $.siguiente.setVisible(!fecha.isAfter(fechaMaxima));
 }
 
 function eventoClickAnterior() {
@@ -79,9 +85,6 @@ function eventoClickAnterior() {
     fechaSeleccionada = diaAnterior.toDate();
     actualizarInfoNavegacion();
     cargarLista();
-
-    $.anterior.setVisible(!diaAnterior.isBefore(fechaMinima));
-    $.siguiente.setVisible(!diaAnterior.isAfter(fechaMaxima));
 }
 
 function eventoClickSiguiente() {
@@ -89,9 +92,6 @@ function eventoClickSiguiente() {
     fechaSeleccionada = diaSiguiente.toDate();
     actualizarInfoNavegacion();
     cargarLista();
-
-    $.anterior.setVisible(!diaSiguiente.isBefore(fechaMinima));
-    $.siguiente.setVisible(!diaSiguiente.isAfter(fechaMaxima));
 }
 
 function eventoClickHora(e) {

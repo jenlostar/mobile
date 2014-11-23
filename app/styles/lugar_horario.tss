@@ -28,7 +28,7 @@
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     backgroundColor: '#FFF7F2',
     font: {
-        fontFamily: 'SourceSansPro-Light',
+        fontFamily: 'SourceSansPro-Regular',
         fontSize: '24sp'
     }
 },

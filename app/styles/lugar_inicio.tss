@@ -120,15 +120,4 @@
         fontFamily: 'SourceSansPro-Light',
         fontSize: '23sp'
     }
-},
-
-'#itemCheck': {
-    width: '35dip',
-    height: '35dip',
-    color: '#FFBB33',
-    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-    font: {
-        fontFamily: 'FontAwesome',
-        fontSize: '24dip'
-    }
 }

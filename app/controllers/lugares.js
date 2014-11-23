@@ -3,7 +3,7 @@ var parametros = arguments[0] || {},
     buscar = Ti.UI.Android.createSearchView({hintText : 'Buscar'});
 
 function procesarRespuesta(jsonArray) {
-    var lugares = [];
+    var listItems = [];
 
     _.each(jsonArray, function(lugar) {
         var item = {
@@ -18,10 +18,10 @@ function procesarRespuesta(jsonArray) {
             }
         };
 
-        lugares.push(item);
+        listItems.push(item);
     });
 
-    $.seccion.setItems(lugares);
+    $.seccion.setItems(listItems);
     Alloy.Globals.Loader.hide();
 }
 
@@ -97,7 +97,7 @@ function eventoOpen() {
     }
 }
 
-function eventoClick(e) {
+function eventoClickLugar(e) {
     var item = e.section.getItemAt(e.itemIndex);
     Alloy.Globals.lugar = item.data;
     Alloy.createController('lugar', item.data);
@@ -111,7 +111,7 @@ $.lugares.activity.onCreateOptionsMenu = crearMenu;
 
 buscar.addEventListener('change', eventoBuscar);
 $.lugares.addEventListener('open', eventoOpen);
-$.lista.addEventListener('itemclick', eventoClick);
+$.lista.addEventListener('itemclick', eventoClickLugar);
 
 $.lugares.open();
 
