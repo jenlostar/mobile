@@ -6,7 +6,7 @@ function procesarRespuesta(jsonArray) {
     var lugares = [];
 
     _.each(jsonArray, function(lugar) {
-        lugares.push({
+        var item = {
             data: lugar,
             nombre: {text: lugar.name},
             descripcion: {text: lugar.description},
@@ -16,7 +16,9 @@ function procesarRespuesta(jsonArray) {
                 backgroundColor: 'transparent',
                 searchableText: lugar.name +' '+ lugar.description,
             }
-        });
+        };
+
+        lugares.push(item);
     });
 
     $.seccion.setItems(lugares);
