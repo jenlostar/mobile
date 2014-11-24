@@ -1,15 +1,8 @@
-var barraCalificacion = require('titutorial.ratingbar'),
+var ratingBar = require('titutorial.ratingbar'),
     API = require('http_client'),
     usuario = Ti.App.Properties.getObject('user'),
-    lugar = Alloy.Globals.lugar;
-
-barraCalificacion = barraCalificacion.createRatingBar({
-     left: 15,
-     rating: 0,
-     stars: 5,
-     stepSize: 1,
-     isIndicator: false
-});
+    lugar = Alloy.Globals.lugar,
+    barraEstrellas;
 
 function cambiarCalificacion(e) {
     var data = {user_id: usuario.id, place_id: lugar.id, value: e.rating};
@@ -24,13 +17,24 @@ function cambiarCalificacion(e) {
 
 function actualizarValores(json) {
     $.promedioValor.text = json.place.rating_average;
-    barraCalificacion.setRating(json.value);
+    barraEstrellas.setRating(Number(json.value));
 }
 
 function respuestaCalificacionActual(json) {
-    actualizarValores(json);
+    barraEstrellas = ratingBar.createRatingBar({
+         left: 15,
+         stars: 5,
+         stepSize: 1,
+         isIndicator: false,
+         rating: json.value
+    });
+
+    $.promedioValor.text = json.place.rating_average;
+
+    barraEstrellas.addEventListener('change', cambiarCalificacion);
+    $.calificar.add(barraEstrellas);
+
     Alloy.Globals.Loader.hide();
-    barraCalificacion.addEventListener('change', cambiarCalificacion);
 }
 
 function errorRespuesta() {
@@ -49,5 +53,3 @@ function cargarCalificacionActual() {
 }
 
 cargarCalificacionActual();
-
-$.calificar.add(barraCalificacion);
