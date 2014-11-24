@@ -76,8 +76,17 @@ function actualizarInfoNavegacion() {
 
     $.diaActualNavegacion.text = fecha.format('dddd DD MMMM');
 
-    $.anterior.setVisible(!fecha.isBefore(fechaMinima));
-    $.siguiente.setVisible(!fecha.isAfter(fechaMaxima));
+    if (fecha.isAfter(fechaMinima)) {
+        $.anterior.setVisible(true);
+    } else {
+        $.anterior.setVisible(false);
+    }
+
+    if (fecha.isBefore(fechaMaxima)) {
+        $.siguiente.setVisible(true);
+    } else {
+        $.siguiente.setVisible(false);
+    }
 }
 
 function eventoClickAnterior() {
