@@ -1,13 +1,10 @@
 {
   "global": {
-    "API": "http://backend-jenlostar.herokuapp.com/api/v1"
+    "API": "http://backend-jenlostar.herokuapp.com/api/v1",
+    "PASSWORD_URL": "http://backend-jenlostar.herokuapp.com/users/password/new"
   },
-  "env:development": {
-    "API": "http://backend-jenlostar.herokuapp.com/api/v1"
-  },
-  "env:test": {
-    "API": "http://backend-jenlostar.herokuapp.com/api/v1"
-  },
+  "env:development": {},
+  "env:test": {},
   "env:production": {},
   "os:android": {},
   "os:blackberry": {},

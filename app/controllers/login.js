@@ -55,11 +55,16 @@ function eventoClickLogin() {
     post.send(JSON.stringify(data));
 }
 
+function eventoClickRecuperarClave() {
+    Titanium.Platform.openURL(Alloy.CFG.PASSWORD_URL);
+}
+
 require('ui').touchFeedbackButton($.entrar, $.registrarse);
 require('ui').touchFeedbackButton($.recuperarContrasena);
 
 $.ventanaLogin.addEventListener('open', eventoOpen);
 $.registrarse.addEventListener('click', eventoClickRegistro);
 $.entrar.addEventListener('click', eventoClickLogin);
+$.recuperarContrasena.addEventListener('click', eventoClickRecuperarClave);
 
 $.ventanaLogin.open();
